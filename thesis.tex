@@ -1,7 +1,11 @@
+%% !TeX program = lualatex
+
 \documentclass[11pt]{report}
 
 % needed packages
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -10,8 +14,10 @@
 \usepackage{verbatim}
 \usepackage{tikz-cd}
 \usepackage{dirtytalk}
-\usepackage{setspace}
+%\usepackage{setspace}
+\usepackage{microtype}
 \usepackage[italian]{babel}
+
 \usepackage{graphicx}
 \graphicspath{{./fig/}}
 
@@ -30,11 +36,13 @@
 \newcommand{\gG}{\Gamma}
 
 \newcommand{\ideal}{\trianglelefteq}
-\newcommand{\ord}{\text{ord}}
-\renewcommand{\dim}{\text{dim}}
+
+\DeclareMathOperator{\ord}{ord}
+%\DeclareMathOperator{\dim}{dim}
 \renewcommand{\l}{\ell}
-\newcommand{\Div}{\text{Div}}
-\renewcommand{\div}{\text{div}}
+\DeclareMathOperator{\Div}{Div}
+\let\div\relax
+\DeclareMathOperator{\div}{div}
 
 
 % theorems etc.
@@ -56,6 +64,7 @@
 
 % Document
 \begin{document}
+	
     \input{chapters/f.tex}
     \tableofcontents
     \input{chapters/1.tex}
@@ -65,5 +74,5 @@
     \input{chapters/5.tex}
     \bibliographystyle{plain}
     \bibliography{sample}
-
+    
 \end{document}

@@ -4,7 +4,7 @@
         Un anello è una terna ordinata $(R,+,\cdot)$, tale che $R$ è un insieme non vuoto, $(R,+)$ è un gruppo abeliano, la moltiplicazione 
         è associativa su $R$ e valgono le seguenti leggi distributive: $a(b + c) = ab + ac, (b + c)a = ba + ca$ per ogni $a,b,c \in R$. Se 
         anche la moltiplicazione è commutativa diremo che l'anello è commutativo. Infine se esiste un elemento $e \in R$ tale che per ogni 
-        $a \in R$, vale che $ae = ea = a$, tale elemento è detto identità, è unico e l'anello è detto con identità. \\
+        $a \in R$, vale che $ae = ea = a$, tale elemento è detto identità, è unico e l'anello è detto con identità.
         \begin{comment}
             Un sottoinsieme $I \subseteq R$ si dice ideale se: è non vuoto, è un sottogruppo per la somma e per ogni $a \in I, r \in R, ar \in I$  
         e si indica con $I \ideal R$. Sia $a \in R$, si indica con $(a)$ l'ideale principale generato da $a$, ed è definito come $(a) = \{ar : 
@@ -708,7 +708,7 @@
     \end{itemize}
     Siano ora $P_1,\ldots,P_t \in \P^2$, e per semplicità nella trattazione suppongo che $P_i \in U_3$ per ogni $i$, quindi $P_i = [a_{i1},a_{i2},1]$. Sia $U = \P^2 \setminus \{P_1,\ldots,P_t\}$. \\
     Definisco i morfismi $f_i : U \to \P^1, f_i(X_1,X_2,X_3) = [X_1 -a_{i1}X_3, X_2 - a_{i2}X_3]$ e sia $f = (f_1,\ldots,f_t) : U \to \P^1 \times \cdots \times \P^1$ la mappa prodotto. Sia infine $G \subseteq U \times \P^1 \times \cdots \times \P^1$ il grafico di $f$.\\
-    Fissate quindi le coordinate omogenee $X_1,X_2,X_3$ per $\P^2$ e $Y_{i1},Y_{i2}$ per la $i$-esima copia di $\P^1$, considero $B = V({Y_{i2}(X_1-a_{i1}X_3) - Y_{i1}(X_2-a_{i2}X_3)$ : $ i \in \{1,\ldots,t\}})$.\\
+    Fissate quindi le coordinate omogenee $X_1, X_2, X_3$ per $\P^2$ e $Y_{i1}, Y_{i2}$ per la $i$-esima copia di $\P^1$, considero $B = V(Y_{i2} (X_1-a_{i1}X_3) - Y_{i1}(X_2-a_{i2}X_3)$ : $ i \in \{1,\ldots,t\})$.\\
     Chiaramente $G \subseteq B$. Sia $\pi : B \to \P^2$ la restrizione della proiezione e sia, per ogni $i$, $E_i = \pi^{-1}(P_i)$. Valgono i seguenti fatti: \begin{enumerate}
         \item $E_i = \{P_i\} \times \{f_1(P_i)\} \times \cdots \times \P^1 \times \cdots \times \{f_t(P_i)\}$, con $\P^1$ nell'$i$-esima posizione; quindi $E_i$ è isomorfo a $\P^1$.
         \item $B \setminus \cup_{i=1}^t E_i = B \cap (U \times \P^1 \times \cdots \times \P^1) = G$, perciò $\pi$ si restringe ad un isomorfismo tra $B \setminus \cup_{i=1}^t E_i$ e $U$.
