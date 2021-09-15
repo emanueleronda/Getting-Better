@@ -1,0 +1,23 @@
+\babel@toc {italian}{}
+\babel@toc {italian}{}
+\contentsline {chapter}{\numberline {1}Concetti Introduttivi}{2}%
+\contentsline {section}{\numberline {1.1}Anelli, Moduli e Campi}{2}%
+\contentsline {section}{\numberline {1.2}Spazi affini e spazi proiettivi}{7}%
+\contentsline {section}{\numberline {1.3}Insiemi Algebrici}{8}%
+\contentsline {subsection}{\numberline {1.3.1}Caso Affine}{8}%
+\contentsline {subsection}{\numberline {1.3.2}Caso Proiettivo}{9}%
+\contentsline {section}{\numberline {1.4}Curve Algebriche Piane}{13}%
+\contentsline {subsection}{\numberline {1.4.1}Caso Affine}{13}%
+\contentsline {subsection}{\numberline {1.4.2}Caso Proiettivo}{14}%
+\contentsline {section}{\numberline {1.5}Varietà, Morfismi e Mappe Razionali}{16}%
+\contentsline {section}{\numberline {1.6}Scoppiamento di punti affini e proiettivi, Trasformazioni quadratiche e Modello non-singolare}{21}%
+\contentsline {chapter}{\numberline {2}Divisori e lo Spazio L(D)}{30}%
+\contentsline {section}{\numberline {2.1}Divisori}{30}%
+\contentsline {section}{\numberline {2.2}Lo spazio vettoriale L(D)}{33}%
+\contentsline {section}{\numberline {2.3}Il Teorema di Riemann}{35}%
+\contentsline {chapter}{\numberline {3}Differenziali ed il Divisore Canonico}{37}%
+\contentsline {section}{\numberline {3.1}Derivazioni e Differenziali}{37}%
+\contentsline {section}{\numberline {3.2}Divisori Canonici}{40}%
+\contentsline {chapter}{\numberline {4}Il Teorema di Riemann-Roch e la sua dimostrazione}{42}%
+\contentsline {chapter}{\numberline {5}Applicazioni}{44}%
+\contentsline {section}{\numberline {5.1}Caratterizzazione delle Curve Ellittiche}{44}%

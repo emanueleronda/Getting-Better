@@ -1,0 +1,69 @@
+\documentclass[11pt]{report}
+
+% needed packages
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{verbatim}
+\usepackage{tikz-cd}
+\usepackage{dirtytalk}
+\usepackage{setspace}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\graphicspath{{./fig/}}
+
+
+% symbols
+\newcommand{\numberset}{\mathbb}
+\newcommand{\A}{\numberset{A}}
+\newcommand{\N}{\numberset{N}}
+\renewcommand{\P}{\numberset{P}}
+\newcommand{\Z}{\numberset{Z}}
+
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cO}{\mathcal{O}}
+
+\newcommand{\gvf}{\varphi}
+\newcommand{\gG}{\Gamma}
+
+\newcommand{\ideal}{\trianglelefteq}
+\newcommand{\ord}{\text{ord}}
+\renewcommand{\dim}{\text{dim}}
+\renewcommand{\l}{\ell}
+\newcommand{\Div}{\text{Div}}
+\renewcommand{\div}{\text{div}}
+
+
+% theorems etc.
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[chapter]
+\newtheorem{proposizione}[teorema]{Proposizione}
+\newtheorem{lemma}[teorema]{Lemma}
+\newtheorem{corollario}[teorema]{Corollario}
+\newtheorem{esercizio}[teorema]{Esercizio}
+
+\theoremstyle{definition}
+\newtheorem{definizione}[teorema]{Definizione}
+\newtheorem{esempio}[teorema]{Esempio}
+
+\theoremstyle{remark}
+\newtheorem*{nota}{Nota}
+\newtheorem{osservazione}[teorema]{Osservazione}
+
+
+% Document
+\begin{document}
+    \input{chapters/f.tex}
+    \tableofcontents
+    \input{chapters/1.tex}
+    \input{chapters/2.tex}
+    \input{chapters/3.tex}
+    \input{chapters/4.tex}
+    \input{chapters/5.tex}
+    \bibliographystyle{plain}
+    \bibliography{sample}
+
+\end{document}

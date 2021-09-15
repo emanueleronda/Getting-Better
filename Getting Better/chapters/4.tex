@@ -1,0 +1,54 @@
+\chapter{Il Teorema di Riemann-Roch e la sua dimostrazione}
+    Questo teorema è un raffinamento del Teorema di Riemann, ovvero, 
+    la relazione dell'enunciato di Riemann, nel Teorema di Riemann-Roch 
+    diventa un'uguaglianza, grazie all'aggiunta di un opportuno addendo. \\
+    Un risultato cruciale nella dimostrazione del teorema è: 
+    \begin{lemma}[di Riduzione di Noether]
+        Siano $W$ un divisore canonico su $X$, $D$ un qualunque divisore su $X$ e $P \in X$. 
+        Allora, se $\l(D) > 0$ e $\l(W-D-P) \neq \l(W-D)$, allora, $\l(D) = \l(D+P)$.
+    \end{lemma}
+    \begin{proof}
+        Sia $C$ piana i cui punti multipli sono ordinari e sia $P \in C$ semplice, e siano delle coordinate 
+        omogenee in $\P^2$ tali che $Z$ intersechi $C$ in $n$ punti distinti. Sia $E_m = m \sum_{i=1}^n P_i - E$; 
+        siccome la tesi del teorema è invariante per classi di equivalenza di divisori, allora posso supporre $W = E_{n-3}$ 
+        e $D \succ 0$. In particolare $L(W-D) \subseteq L(E_{n-3})$.\\
+        Sia $h \in L(W-D) \setminus L(W-D-P)$, allora $h = \frac{G}{Z^{n-3}}$, dove $G$ è un'aggiunta di $C$ di grado $n-3$. Allora $\div(G) 
+        = D + E + A, A \succ 0, A \not\succ P$.\\
+        Sia $L$ una retta che non contiene alcun $P_i$, e tale che intersechi $C$ in $P$ ed altri $n-1$ punti semplici tutti distinti da $P$. \\
+        Considero $f \in L(D+P)$ e pongo $D' = D + \div(f)$. Devo provare che $f \in L(D) \iff D' \succ 0$.\\
+        Siccome $D + P \equiv D' + P$, ed entrambi sono effettivi, esiste una curva $H$ di grado $n-2$ tale che $\div(H) = D'+P + E + A+B$, dove $B$ 
+        è il divisore che ha come unici punti con coefficiente non nullo quelli di $L \cap C$ diversi da $P$ con coefficiente $1$.\\
+        Osservo ora che $H$ è una curva di grado $n-2$ che contiene $n-1$ punti allineati, cioè $P + B$, quindi per Bezout $L$ è una componente di $H$, 
+        dunque $P \in H$, ovvero $\div(H) = D' + P + E + A + B \succ P$, ma $P$ non compare in $E + A + B$, dunque $D' + P \succ P \Longrightarrow D' \succ 0$.
+    \end{proof}
+    Ora posso procedere con l'enunciato e la dimostrazione del Teorema di Riemann-Roch:
+    \begin{teorema}[di Riemann-Roch]
+        Sia $W$ un divisore canonico su $X$, allora per ogni divisore su $X$, $$\l(D) = \deg(D) + 1 - g + \l(W - D)$$
+    \end{teorema}
+    \begin{proof}
+        Per un divisore $D$ fissato, considero l'equazione \begin{equation}\label{eq:rr}
+            \l(D) = \deg(D) + 1 - g + \l(W - D)
+        \end{equation}
+        Distinguo due casi: \begin{enumerate}
+            \item $\l(W - D) = 0$: siccome $g \leq \l(W)$ e $\l(W) \leq \l(W-D) + \deg(D)$, ne segue che $\l(D) \geq 1$ per il Teorema di Riemann. Allora procedo per induzione su $\l(D)$:
+            sia $\l(D) = 1$, se \ref{eq:rr} fosse falsa, allora per il Teorema di Riemann, $\l(D) > 1$, assurdo. Sia quindi $n$, tale che per ogni divisore tale che $\l(D) = n-1$ e $\l(W-D) = 0$ 
+            valga il Teorema di Riemann-Roch. Sia quindi $D$ tale che $\l(D) = n, \l(W-D) = 0$ e sia $P \in X$ tale che $\l(D-P) = \l(D) - 1$, allora per il Lemma di Riduzione, $\l(W-(D-P)) = \l(W-D) = 0$. 
+            Dunque per ipotesi induttiva \begin{equation*}
+                \l(D) = \l(D-P) + 1 = \deg(D-P) + 1 - g + 1 = \deg(D) + 1 - g
+            \end{equation*}
+            \item $\l(W-D) > 0$: questo caso si verifica per $\deg(D) \leq 2g -2$; per assurdo sia $D$ un divisore per cui non vale il Teorema di Riemann-Roch. Allora sia un tale $D$ di grado massimo, ovvero tale che 
+            $D + P$ soddisfa \ref{eq:rr} per ogni $P \in X$, sia quindi $P$ tale che $\l(W-(D+P)) = \l(W-D)-1$, quindi per il Lemma di Riduzione, $\l(D) = \l(D+P)$. Allora \begin{multline*}
+                \l(D) = \l(D+P) = \deg(D+P) + 1 - g - \l(W-(D+P)) = \\ = \deg(D) + 1 - g + \l(W-D) 
+            \end{multline*}
+            Ma quindi per $D$ vale il Teorema di Riemann-Roch, assurdo.
+        \end{enumerate}
+    \end{proof}
+    \begin{corollario}
+        Se $W$ è un divisore canonico, allora, $\l(W) = 1$.
+    \end{corollario}
+    \begin{corollario}
+        Se $\deg(D) \geq 2g-1$, allora, $\l(D) = \deg(D)+1-g$.
+    \end{corollario}
+    \begin{corollario}
+        Se $\deg(D) \geq 2g$, allora $\l(D-P) = \l(D)-1$ per ogni $P \in X$.
+    \end{corollario}

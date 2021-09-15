@@ -1,0 +1,29 @@
+\chapter{Applicazioni}
+    Dal Teorema di Riemann-Roch discendono alcuni risultati e costruzioni fondamentali. 
+    \section{Caratterizzazione delle Curve Ellittiche}
+        Voglio dimostrare che una curva algebrica proiettiva irriducibile ha genere $1$ se e solo se 
+        è birazionalmente equivalente ad una cubica non-singolare.\\
+        Sia $C$ una curva di genere $1$, allora ogni divisore canonico $W$ su $C$, è di grado $2\cdot 1 - 2 = 0$, 
+        dunque $L(W-P) = 0$ per ogni $P \in X$. Applicando Riemann-Roch, segue che $\l(P) = 1$, per ogni $P \in X$.\\
+        Analogamente, $\l(rP) = r$ per ogni $r \in \N, r \neq 0, P \in X$. In particolare $L(P) = k, L(rP) \neq k$ per $r > 1, 
+        P \in X$. Sia $P \in X$ fissato.\\
+        Sia $\{1,x\}$ una base per $L(2P)$, allora $\ord_P(x) = -2$ altrimenti $\ord_P(x) \geq -1$, dunque $x \in L(P) = k$, ma questo è 
+        assurdo in quanto, in tal caso, $\{1,x\}$ non sarebbe una base di $L(2P)$. Sia ora $\{1,x,y\}$ una base di $L(3P)$, allora 
+        $\ord_P(y) = -3$, altrimenti, analogamente a prima, $\{1,x,y\}$ non sarebbe una base di $L(3P)$. \\
+        Siccome $1,x,y,xy,x^2,x^3,y^2 \in L(6P)$, ma sono linearmente dipendenti, esiste una relazione del tipo: $$ay^2 + (bx+c)y = Q(x)$$ 
+        in cui $Q$ è un polinomio di grado minore o uguale a $3$, con i coefficienti di questa combinazione non tutti nulli. \\
+        Se $Q = 0$, allora $ay^2 + (bx+c)y = 0$, ma per motivi di ordine, allora tutti i coefficienti devono essere nulli, quindi $Q \neq 0$. 
+        Inoltre, essendo $Q$ non nullo, allora, calcolando l'ordine in entrambi i membri, segue che se $a = 0$, allora, non ci sarebbe uguaglianza 
+        di ordini, in quanto $\ord_P(bxy + cy) \in \{-5,-3\}$, mentre $\ord_P(Q(x)) \in \{-6.-4,-2,0\}$, quindi non varrebbe l'uguaglianza. Quindi 
+        ne segue che $a \neq 0$, ma allora $\deg(Q) = 3$. Suppongo $a = 1$.\\
+        Con il cambio di base che mappa $y$ in $y + \frac{1}{2}(bx+c)$, l'equazione diventa della forma: $$y^2 = \prod_{i = 1}^3 (x-\alpha_i)$$
+        Se per assurdo due degli $\alpha_i$ sono uguali tra loro, ad esempio $\alpha_1 = \alpha_2$, allora, $(\frac{y}{x -\alpha_1})^2 = x - \alpha_3$, 
+        da cui $x,y \in k(\frac{y}{x-\alpha_1})$, ma $\ord_P(\frac{y}{x - \alpha_i}) = -1$, quindi $\frac{y}{x - \alpha_i} \in L(P) = k$, ovvero $x,y \in k$, 
+        ma questo è assurdo. \\
+        Per quanto visto $K = k(x,y)$, in virtù della Proposizione \ref{prop:fun-fields} e per la Proposizione \ref{prop:techn4}. Allora, $K$ è isomorfo a $K(C)$ con $C = V(Y^2Z-X(X-Z)(X-\lambda Z)), 
+        \lambda \neq 0,1$ che è una cubica non-singolare.\\
+        \noindent Viceversa sia $C$ una curva birazionalmente equivalente ad una cubica non-singolare, allora, $X = V(Y^2Z-X(X-Z)(X-\lambda Z)), \lambda \neq 0,1$. 
+        Per la Proposizione \ref{prop:genus} segue $g = \frac{2 \cdot 1}{2} = 1$.
+        \begin{definizione}
+            Una curva $C$, di genere $1$, è detta \emph{ellittica}.
+        \end{definizione}

@@ -1,0 +1,296 @@
+\chapter{Divisori e lo Spazio L(D)}
+    Per tutto il capitolo $C$ sarà una curva proiettiva irriducibile(tranne 
+    dove specificato). $X$ il suo modello non singolare e $f : X \to C$ la 
+    mappa birazionale. Inoltre $K = k(C) = k(X)$ è il campo delle funzioni 
+    razionali su $C$. I punti di $X$ sono detti posti di $C$ e $\ord_P$ la 
+    funzione ordine su $K$.
+    \section{Divisori} \label{par:div}
+        Un \emph{divisore} su $X$ è una somma formale $\sum_{P \in X} n_PP$, 
+        dove $P \in X. n_P \in \Z$ e $n_P = 0$ per tutti tranne un numero 
+        finito di elementi di $X$. Analogamente, si definisce l'insieme dei 
+        divisori su $X$ come il gruppo abeliano libero generato da $X$ e si 
+        denota con $\Div(X)$. \\
+        Su $\Div(X)$ è definita la mappa $\deg : \Div(X) \to \Z$, che associa 
+        ad un divisore $D = \sum_{P \in X}n_PP, \deg(D) = \sum_{P \in X} n_P$. 
+        L'immagine di un divisore $D$ è detta \emph{grado del divisore}. La 
+        mappa grado è un omomorfismo di gruppi. \\
+        Su $\Div(X)$ è definito un ordine parziale $\succ$, definito come: $D 
+        = \sum_{P \in X} n_PP, D' = \sum_{P \in X} m_PP, D \succ D' \iff n_P 
+        \geq m_P \, \forall P \in X$. Un divisore $D$ è detto \emph{effettivo} 
+        se $D \succ 0$.\\
+        \noindent
+        Sia $C$ una curva piana proiettiva irriducibile di grado $n$ e sia $G$ 
+        un'altra curva di grado $m$, eventualmente riducibile, che non 
+        contiene $C$ come componente, allora è ben definito il divisore di 
+        $G$, come $\div(G) = \sum_{P \in X} \ord_P(G)P$. Per la Proposizione 
+        \ref{prop:molt-int}, e per il Teorema di Bezout, $\deg(\div(G)) = mn$.
+        \\
+        \noindent
+        Sia ora $z \in K, z \neq 0$. Allora è ben definito il divisore di $z$ 
+        come $\div(z) = \sum_{P \in X} \ord_P(z)P$, siccome $z$ ha un numero 
+        finito di zeri e poli, allora $\div(z)$ è ben definito. \\
+        Siano inoltre, $(z)_0 = \sum_{\ord_P(z) > 0} \ord_P(z)P$ e 
+        $(z)_{\infty} = \sum_{\ord_P(z) < 0} -\ord_P(z)P$. Allora $\div(z) = 
+        (z)_0 - (z)_{\infty}$. Inoltre $\div(zz') = \div(z) + \div(z'), 
+        \div(z^{-1}) = -\div(z)$. Ovvero $\div: K \setminus \{0\} \to \Div(X)$ 
+        è un omomorfismo di gruppi.
+        \begin{proposizione}
+            Se $z \in K$ è non nullo allora $\deg(\div(z)) = 0$.
+        \end{proposizione}
+        \begin{proof}
+            Se $z \in K \setminus \{0\}$, allora esistono degli omogenei dello 
+            stesso grado $g,h \in \gG_h(C)$ tali che $z = \frac{g}{h}$, ma 
+            allora $g,h$ sono immagini di polinomi omogenei dello stesso grado 
+            $G,H \in k[X,Y,Z]$, dunque $\div(z) = \div(G) - \div(H)$, da cui 
+            segue la tesi perché avendo $G,H$ lo stesso grado anche i loro 
+            divisori hanno grado uguale.
+        \end{proof}
+        \begin{corollario}
+            Sia $z \in K, z \neq 0$. Le seguenti affermazioni sono equivalenti: 
+            \begin{enumerate}[label = \alph*]
+                \item $\div(z) \succ 0$;
+                \item $z \in k$;
+                \item $\div(z) = 0$.
+            \end{enumerate}
+        \end{corollario}
+        \begin{corollario}
+            Siano $z,z' \in K$ entrambi non-nulli. Allora $\div(z) = \div(z') 
+            \iff z = \lambda z'$ per un opportuno $\lambda \in k$ non nullo.
+        \end{corollario}
+        \begin{definizione}
+            Siano $D,D' \in \Div(X)$. $D,D'$ si dicono \emph{linearmente 
+            equivalenti}, e si scrive $D \equiv D'$ se e solo se esiste $z 
+            \in K$ tale che $D = D' + \div(z)$.
+        \end{definizione}
+        \begin{proposizione}\label{prop:techn3}
+            Valgono i seguenti fatti: \begin{enumerate}
+                \item La relazione di equivalenza lineare è un'equivalenza su 
+                $\Div(X)$;
+                \item $D \equiv 0 \iff D = \div(z)$ per un'opportuna $z \in K$;
+                \item Se $D \equiv D'$ allora, $\deg(D) = \deg(D')$;
+                \item $D \equiv D', E \equiv E' \Longrightarrow D+E \equiv 
+                D'+E'$;
+                \item Se $C$ è una curva piana, allora $D \equiv D'$ se e solo 
+                se esistono due curve $G,G'$ dello stesso grado tali che $D + 
+                \div(G) = D' + \div(G')$
+            \end{enumerate}
+        \end{proposizione}
+        \begin{proof}
+            Che la lineare equivalenza sia un'equivalenza è ovvio. Sia $D \in 
+            \Div(X)$ tale che $D \equiv 0$, allora, esiste $z \in K$ tale che 
+            $D = \div(z)$. Viceversa, se $D = \div(z)$ per un'opportuna $z \in 
+            K$, allora $D \equiv 0$. \\
+            Se $D \equiv D'$, allora, esiste $z \in K$ tale che $D = D' + 
+            \div(z)$; calcolando il grado: $\deg(D) = \deg(D') + \deg(\div(z)) 
+            = \deg(D')$.\\
+            Siano $z,w \in K$, tali che $D = D' + \div(z), E = E' + \div(w)$, 
+            allora, $D + E = D' + E' + \div(zw)$.\\
+            Sia ora $C$ piana, e siano $D = D' + \div(z)$, ma $z = \frac{G'}{G}
+            $, con $G,G'$ polinomi omogenei dello stesso grado, dunque $D + 
+            \div((G)) = D' + \div(G')$. Il viceversa è analogo.
+        \end{proof}
+        Sia ora il caso di una curva piana proiettiva irriducibile, i cui 
+        punti multipli sono tutti ordinari; per ciascun posto $Q$ della curva, 
+        definisco $r_Q = m_{f(Q)}(C)$. Sia il divisore $E = \sum_{Q \in X} 
+        (r_Q - 1)Q$. $E$ è un divisore effettivo di grado $\sum_{Q \in X} r_Q
+        (r_Q -1)$. \\
+        Una curva piana proiettiva $G$ tale che $\div(G) \succ E$, è detta 
+        \emph{aggiunta} di $C$.
+        \begin{teorema}[del Residuo]
+            Siano $C,E$ come sopra. Siano $D,D'$ divisori effettivi di $X$ 
+            linearmente equivalenti. Sia $G$ una aggiunta di $C$ di grado $m$ 
+            tale che $\div(G) = D + E + A$, per un opportuno divisore 
+            effettivo $A$. Allora esiste un'altra aggiunta $G'$ di $C$ di 
+            grado $m$ tale che $\div(G') = D' + E + A$.
+        \end{teorema}
+        \begin{proof}
+            Per la Proposizione \ref{prop:techn3} esistono $H,H'$ curve dello 
+            stesso grado tali che $D + \div(H) = D' + \div(H')$. Allora: 
+            \begin{equation*}
+                \div(GH) = D' + \div(H') + E + A \succ \div(H') + E
+            \end{equation*}
+            Per la Proposizione \ref{prop:n-c} le condizioni di Noether 
+            rispetto a $F,H',GH$ sono soddisfatte in ogni $P \in X$, quindi, 
+            esistono $F',G' \in k[X,Y,Z]$ omogenei tali che $GH = F'F + G'H'$. 
+            Per il Teorema di Noether $\deg(G') = m$. Inoltre: 
+            \begin{equation*}
+                \div(G') = \div(GH) - \div(H') = D' + E + A    
+            \end{equation*}
+        \end{proof}
+    \newpage
+    \section{Lo spazio vettoriale L(D)}
+        Sia $D = \sum_{P \in X}n_PP$ un divisore di $X$ fissato, allora 
+        considero l'insieme $L(D) = \{f \in K : \ord_P(f) \geq -n_P \, 
+        \forall P \in X\} \cup \{0\} = \{f \in K : \div(f) + D \succ 0\} \cup 
+        \{0\}$.\\
+        Con le usuali operazioni di somma e prodotto per scalare è uno spazio 
+        vettoriale sul campo $k$. Denoto la dimensione di $L(D)$ con $\l(D)$.
+        \begin{proposizione}
+            Valgono i seguenti fatti: \begin{enumerate}
+                \item Se $D \prec D'$, allora $L(D)$ è sottospazio di $L(D')$ 
+                e $\dim_k \frac{L(D')}{L(D)} \leq \deg(D'-D)$;
+                \item $L(0) = k, L(D) = 0$ se $\deg(D) < 0$;
+                \item $L(D)$ è di dimensione finita per ogni $D$ e se $\deg(D) 
+                \geq 0$, allora $\l(D) \leq \deg(D) + 1$;
+                \item Se $D \equiv D'$, allora $\l(D) = \l(D')$.
+            \end{enumerate} 
+        \end{proposizione}
+        \begin{proof}
+            Siccome $D' = D + P_1 + \ldots + P_s$, è sufficiente dimostrare 
+            il primo enunciato per $D' = D + P$.\\
+            Sia $t \in \cO_P(X)$ un parametro uniformizzante e sia $r = n_P$, 
+            il coefficiente in $D$ di $P$.\\
+            Definisco $\gvf : L(D + P) \to k$, come $\gvf(f) = (t^{r+1}f)(P)$; 
+            chiaramente $\gvf$ è lineare, e $\ker(\gvf) = L(D)$, dunque 
+            $\bar{\gvf} : \frac{L(D+P)}{L(D)} \to k$ è iniettiva, dunque 
+            $\dim_k \frac{L(D+P)}{L(D)} \leq 1$.\\
+            $L(0) = \{f \in K : \div(f) \succ 0\} = k$; Sia $D$ di grado 
+            negativo, allora, una funzione in $L(D)$ ha $\div(f) \succ 0$ e ha 
+            degli zeri, dunque $f = 0$.\\
+            Sia $D$ fissato e sia $\deg(D) = n$. Allora $D' = D -(n+1)P$, per 
+            $P \in X$ fissato è tale che $L(D') = 0$, da cui $\dim_k L(D) = 
+            \dim_k \frac{L(D)}{L(D')} \leq n+1$.\\
+            Sia $g \in K$, tale che $D = D' + \div(g)$, allora la mappa $\psi 
+            : L(D) \to L(D')$ definita come $\psi(f) = fg$ è lineare ed è un 
+            isomorfismo. Segue $\l(D) = \l(D')$.
+        \end{proof}
+        Sia ora $S \subseteq X$ arbitrario, allora si definisce $L^S(D) = \{
+        f \in K : \ord_P(f) \geq -n_P \, \forall P \in S\}$. e $\deg^S(D) = 
+        \sum_{P \in S} n_P$.
+        \begin{lemma}
+            Se $D \prec D'$, allora $L^S(D) \subseteq L^S(D')$. Inoltre, se 
+            $S$ è finito, $\dim_k \frac{L^S(D)}{L^S(D')} = \deg^S(D)$.
+        \end{lemma}
+        \begin{proof}
+            Analoga a quella nel caso $S = X$.
+        \end{proof}
+        \begin{proposizione} \label{prop:techn4}
+            Sia $x \in K \setminus k, (x)_0$ il suo divisore degli zeri e sia 
+            $n = [K:k(x)]$. Allora: \begin{enumerate}
+                \item $(x)_0$ è un divisore effettivo di grado $n$;
+                \item Esiste una costante $\tau$ tale che $\l(r(x)_0) \geq rn 
+                - \tau$ per ogni $r$.
+            \end{enumerate}
+        \end{proposizione}
+        \begin{proof}
+            Sia $Z = (x)_0 = \sum_{P \in X}n_PP$ e sia $m = \deg(Z)$. Dimostro 
+            che $m \leq n$. \\
+            Sia $S = \{P \in X : n_P > 0\}$. Siano $v_1,\ldots,v_m \in L^S(0)$ 
+            tali che $\bar{v_1},\ldots,\bar{v_m}$ siano una base per 
+            $\frac{L^S(0)}{L^S(-Z)}$. $v_1,\ldots,v_m$ sono linearmente 
+            indipendenti su $k(x)$.\\
+            Sia per assurdo una combinazione $\sum_{i=1}^m g_iv_i = 0, g_i = 
+            \lambda_i + xh_i, xh_i \in L^S(-Z) \, \forall i$, con i 
+            $\lambda_i$ non tutti nulli (posso sempre ricondurmi a questa forma 
+            a meno di moltiplicare per denominatori e potenze di $x$). \\
+            Ma allora $\sum_{i=1}^m \lambda_i v_i = -x \sum_{i=1}^m h_i v_i 
+            \in L^S(-Z)$, quindi $\sum_{i=1}^m \lambda_i \bar{v_i} = 0$, con i 
+            $\lambda_i$ non tutti nulli. Assurdo. Ciò prova che $m \leq n$.\\
+            Dimostro ora la disuguaglianza in $2$. \\
+            Sia $w_1,\ldots,w_n$ una base di $K$ su $k(x)$. Allora per ogni $i$ 
+            esiste un polinomio $F_i \in k(x)[T]$ tale che $F_i(w_i) = 0$; sia 
+            $a_{ij}$ il $j$-esimo coefficiente di $F_i$. Allora $a_{ij} \in 
+            k[x^{-1}]$.\\
+            Allora $\ord_P(a_{ij}) \geq 0$ se $P \notin S$. Inoltre, se 
+            $\ord_P(w_i) < 0, P \notin S$, allora $\ord_P(w_i) < 
+            \ord_P(a_{ij}w_i^{n_i-j})$, ma questo è in contraddizione col 
+            fatto che $F_i(w_i) = 0$.\\
+            Allora esiste $t > 0$, tale che $\div(w_i) + tZ \succ 0, i \in 
+            \{1,\ldots,n\}$. Allora, $w_ix^{-j} \in L^S((r+t)Z), \, \forall i 
+            \in \{1,\ldots,n\}, j \in \{0,\ldots,r\}$.\\
+            Siccome i $w_i$ sono indipendenti su $k(x)$ e $1,\ldots,x^{-r}$ 
+            lo sono su $k$, $\{w_ix^{-j} : i \in \{1,\ldots,n\}, j \in 
+            \{0,\ldots,r\}\}$ è un insieme indipendente su $k$, dunque 
+            $\l((r+t)Z) \geq n(r+1)$, ma d'altro canto $\l((r+t)Z) = \l(rZ) 
+            + \dim_k \frac{L((r+t)Z)}{L^S(Z)} \leq \l(rZ) + tm$.\\
+            Riordinando, segue la tesi in $2$. Osservo ora però che:
+            \begin{equation*}
+                rn -\tau \leq \l(rZ) \leq rm + 1 \Longrightarrow \l(rZ) \leq 
+                r(m-n) + c    
+            \end{equation*} 
+            E la quantità a secondo membro è non-negativa per ogni $r \in \N$, 
+            ne segue $n \leq m$.
+        \end{proof}
+    \newpage
+    \section{Il Teorema di Riemann}
+        \begin{teorema}[di Riemann]
+            Esiste una costante $g$ tale che $\l(D) \geq \deg(D) + 1 - g$, per 
+            ogni divisore $D$.
+        \end{teorema}
+        \begin{proof}
+            Sia, per ogni $D, S(D) = \deg(D) + 1 - \l(D)$; cerco $g \geq S(D)$ 
+            per ogni $D$. \\
+            Siccome $S(0) = 0, g$, se esiste, è non-negativo. Inoltre dalle 
+            proprietà della lineare equivalenza, $D \equiv D' \Longrightarrow 
+            S(D) = S(D')$. Infine se $D \prec D'$, allora $\l(D') - \l(D) \leq 
+            \deg(D') - \deg(D) \Longrightarrow S(D) \leq S(D')$.\\
+            Siano $x \in K \setminus k, Z =(x)_0$ e $\tau$ il più piccolo 
+            intero che soddisfa la relazione della Proposizione 
+            \ref{prop:techn4}. Siccome dalla stessa Proposizione, $S(rZ) \leq 
+            \tau + 1 \, \forall r$, allora, definitivamente deve essere $S(rZ) 
+            = \tau + 1$. Pongo $g = \tau + 1$. \\
+            Per completare la dimostrazione, è sufficiente dimostrare che per 
+            ogni divisore $D$, esiste $D'$ linearmente equivalente a $D$ tale 
+            che $D' \prec rZ$, definitivamente in $r$: siano $Z = 
+            \sum_{P \in X} n_PP, D = \sum_{P \in X} m_PP$, e cerco $f$ 
+            razionale tale che $m_P - \ord_P(f) \leq n_P, \, \forall P \in X$.
+            \\ Sia $y = x^{-1}$ e considero l'insieme $T = \{P \in X : m_P > 0 
+            \text{ e } \ord_P(y) \geq 0\}$. Definisco $f = \prod_{P \in T} 
+            (y - y(P))^{m_P}$. \\
+            Se $\ord_P(y) \geq 0$, allora $m_P - \ord_P(f) \leq 0 \leq n_P$; 
+            altrimenti, se $\ord_P(y) < 0$, per $r$ sufficientemente grande 
+            $m_P - \ord_P(f) \leq rn_P$, da cui la tesi.
+        \end{proof}
+        \begin{definizione}
+            Il più piccolo $g$ che soddisfa la relazione del teorema di 
+            Riemann è detto il genere della curva $C$
+        \end{definizione}
+        \begin{corollario}
+            Se $\l(D_0) = \deg(D_0) + 1 - g$ e $D \equiv D' \succ D_0$, allora 
+            $\l(D) = \deg(D) + 1 - g$.
+        \end{corollario}
+        \begin{corollario}
+            Sia $x \in K \setminus k$, allora $g = \deg(r(x)_0) + 1 - 
+            \l(r(x)_0)$ per $r$ sufficientemente grande.
+        \end{corollario}
+        \begin{corollario}
+            Esiste un intero $N$ tale che ogni divisore di grado superiore ad 
+            $N$ è tale che $\l(D) = \deg(d) + 1 - g$.
+        \end{corollario}
+        \begin{proof}
+            Sia $D_0$ tale che $\l(D_0) = \deg(D_0) + 1 - g$ e sia $N = 
+            \deg(D_0) + g$. Allora $\deg(D - D_0) + 1 -g > 0$, da cui 
+            $\l(D-D_0) > 0$. \\
+            Esiste $f$ razionale tale che $D - D_0 + \div(f) \succ 0 
+            \Longrightarrow D \equiv D + \div(f) \succ D_0$, quindi si 
+            conclude per il primo corollario.
+        \end{proof}
+        \begin{proposizione} \label{prop:genus}
+            Sia $C$ una curva piana proiettiva i cui punti multipli sono tutti 
+            ordinari. Siano $n$ il grado di $C$, e $r_P = m_P(C)$. Allora il 
+            genere di $C$ è $g = \frac{(n-1)(n-2)}{2} - \sum_{P \in C} 
+            \frac{r_P(r_P - 1)}{2}$.
+        \end{proposizione}
+        \begin{proof}
+            Si veda \cite{fulton} Capitolo $8$, Paragrafo $3$.
+        \end{proof}
+        \begin{corollario}
+            Sia $C$ una curva piana proiettiva. Allora $g \leq 
+            \frac{(n-1)(n-2)}{2} - \sum_{P \in C} \frac{r_P(r_P - 1)}{2}$.
+        \end{corollario}
+        \begin{proof}
+            Si veda \cite{fulton} Capitolo $8$, Paragrafo $3$.
+        \end{proof}
+        Considero ora di nuovo $C$ piana proiettiva i cui punti multipli sono 
+        ordinari. Siano $P_1,\ldots,P_n$ i punti di intersezione tra $C$ e la 
+        retta $Z$. Pongo $E_m = m \sum_{i=1}^n P_i - E$, per ogni $m \in \N$, 
+        dove $E$ è il divisore definito nel Paragrafo \ref{par:div}. 
+        \begin{proposizione} \label{prop:en-3}
+            Ogni $h \in L(E_m)$ si può scrivere nella forma $h = 
+            \frac{H}{Z^m}$ dove $H$ è un'aggiunta di $C$ di grado $m$. 
+            Inoltre, se $m = n-3$, allora, $\deg(E_m) = 2g -2, \l(E_m) \geq g$. 
+        \end{proposizione}
+        \begin{proof}
+            Si veda \cite{fulton} Capitolo $8$, Paragrafo $3$.
+        \end{proof}
+        

@@ -1,0 +1,867 @@
+\chapter{Concetti Introduttivi}
+
+    \section{Anelli, Moduli e Campi}
+        Un anello è una terna ordinata $(R,+,\cdot)$, tale che $R$ è un insieme non vuoto, $(R,+)$ è un gruppo abeliano, la moltiplicazione 
+        è associativa su $R$ e valgono le seguenti leggi distributive: $a(b + c) = ab + ac, (b + c)a = ba + ca$ per ogni $a,b,c \in R$. Se 
+        anche la moltiplicazione è commutativa diremo che l'anello è commutativo. Infine se esiste un elemento $e \in R$ tale che per ogni 
+        $a \in R$, vale che $ae = ea = a$, tale elemento è detto identità, è unico e l'anello è detto con identità. \\
+        \begin{comment}
+            Un sottoinsieme $I \subseteq R$ si dice ideale se: è non vuoto, è un sottogruppo per la somma e per ogni $a \in I, r \in R, ar \in I$  
+        e si indica con $I \ideal R$. Sia $a \in R$, si indica con $(a)$ l'ideale principale generato da $a$, ed è definito come $(a) = \{ar : 
+        r \in R\}$. Si dice che gli elementi $r_1,\ldots,r_n \in R$ generano l'ideale $I$ e si scrive $I = (r_1,\ldots,r_n)$ se per ogni $a \in 
+        I$ esistono $a_1,\ldots,a_n \in R$ tali che $a = \sum_{i=1}^n a_ir_i$.
+        \end{comment}
+        \begin{definizione}
+            Un anello $R$ in cui ogni ideale è finitamente generato è detto \emph{noetheriano}.
+        \end{definizione}
+        D'ora in poi verranno considearti solo anelli commutativi con identità e, con abuso di nomenclatura, mi riferirò a questi come anelli.
+        \begin{esercizio}\label{ex:noet-ring}
+            Sia $R$ un anello noetheriano, e sia $\{r_i\}_{i \in \N} \subseteq R$ una successione di elementi di $R$ tali che $(r_i) \subseteq 
+            (r_{i+1})$ per ogni $i$. Allora esiste $n \in \N$ tale che $(r_n) = (r_j)$ per ogni $j \geq n$.
+        \end{esercizio}
+        \begin{proof}
+            Considero l'ideale $I = (r_i : i \in \N)$; siccome $R$ è noetheriano, esiste $n \in \N$ tale che $I = (r_0,\ldots,r_n)$. Affermo che $(r_n) = 
+            (r_j)$ per ogni $j \geq n$. Sia dunque $j \geq n$ fissato. \\
+            L'inclusione $(r_n) \subseteq (r_j)$ è data per ipotesi. Viceversa siccome $r_j \in I = (r_0,\ldots,r_n)$, esistono $a_0,\ldots,a_n \in R$ tali 
+            che $r_j = \sum_{i=0}^n a_ir_i$, ma siccome $r_i \in (r_n) \, \forall i \leq n$, si ha che $r_j = \sum_{i=0}^n a_ir_i \in (r_n)$.
+        \end{proof}
+        \begin{lemma}\label{lem:loc-ring}
+            Sia $R$ un anello. Le seguenti affermazioni sono equivalenti: 
+            \begin{enumerate}[label = \alph*]
+                \item L'insieme degli elementi non invertibili in $R$ ha la struttura di ideale
+                \item $R$ ha un unico ideale massimale che contiene tutti gli altri ideali propri di $R$.
+            \end{enumerate}
+        \end{lemma}
+        \begin{proof}
+            Una dimostrazione di questo fatto si può trovare in \cite{fulton} Capitolo 2, Paragrafo 4.
+            \begin{comment}
+            Sia $M = \{r \in R : r \text{ non è un invertibile in } R\}$ un ideale di $R$. Allora, se $I \ideal R, I \neq R$, allora $I \subseteq
+            M$, perché se esistesse $a \in I \setminus M$, allora $a$ sarebbe un invertibile di $R$, ma quindi $I = (a) = R$, contro l'ipotesi 
+            che $I$ fosse ideale proprio. Quindi $M$ contiene tutti gli ideali propri di $R$ ed in particolare è massimale. \\
+            Viceversa, sia $R$ che contiene un unico ideale massimale, che contiene tutti gli ideali propri di $R$ e sia $M$ tale ideale. Dimostro 
+            che $$M = \{r \in R : r \text{ non è invertibile in } R\}$$ \\
+            Sia $r \in M$, allora $r$ non è invertibile perché altrimenti $R = (r) \subseteq M$, ma $M$ è ideale proprio. Viceversa, se $r$ è un non 
+            invertibile allora $I = (r)$ è un ideale proprio di $R$, quindi, $(r) \subseteq M \Longrightarrow r \in M$.
+            \end{comment}
+        \end{proof}
+        Un anello che rispetta una (e quindi entrambe) delle condizioni del Lemma~\ref{lem:loc-ring} è detto \emph{anello locale}.\\
+        \begin{lemma}\label{lem:DVR}
+            Sia $R$ un dominio che non è un campo. Allora sono equivalenti le seguenti affermazioni: \begin{enumerate}[label = \alph*]
+                \item $R$ è noetheriano, locale e tale che l'ideale massimale sia principale.
+                \item $R$ è tale che esiste un elemento irriducibile $t \in R$ tale che per ogni altro elemento non nullo di $r \in R$, esistono unici 
+                un invertibile $u \in R$ e $n \in \N$ tali che $r = ut^n$.
+            \end{enumerate}
+        \end{lemma}
+        \begin{proof}
+            Sia $R$ noetheriano, locale e con ideale massimale principale. Sia $M$ tale ideale e sia $t \in R$ un suo generatore.\\
+            Dimostro che, per ogni $r \in R, r \neq 0$, esistono $u,n$ come nella seconda condizione: sia $r \in R, r \neq 0$ fissato. \\
+            Se $r$ è un invertibile, basta scegliere $u = r, n = 0$ e si conclude. Sia quindi $r$ un non invertibile: allora, $r \in M$, ed esiste $r_0 \in R$ 
+            tale che $r = r_0t$; se $r_0$ è un invertibile ho concluso, altrimenti $r_0 \in M$, ed esiste $r_1 \in R$ tale che $r_0 = r_1t$. Itero l'argomento. \\
+            Affermo che dopo un numero finito di passi trovo un $r_i$ che è un invertibile. Se per assurdo così non fosse, costruisco una successione 
+            $\{r_i\}_{i \in \N} \subseteq R$ di elementi non invertibili e non nulli tali che $(r_i) \subseteq (r_{i+1})$ per ogni $i$. Per l'Esercizio \ref{ex:noet-ring} 
+            esiste un elemento massimale nella catena degli ideali principali, ovvero, esiste $n \in \N$ tale che $(r_n) = (r_j) \, \forall j \geq n$, in particolare 
+            $(r_n) = (r_{n+1})$, ma allora, esiste $s \in R$ tale che $r_{n+1} = sr_n$, perciò: \begin{equation*}
+                r_n = r_{n+1}t = sr_nt = str_n \Longrightarrow st = 1
+            \end{equation*}
+            Ma questo è assurdo perché $t$ non è invertibile.\\
+            Dimostro l'unicità della scrittura: sia $r \in R$, e siano $u,v \in R$ invertibili ed $m,n \in \N$ tali che $r = ut^m = vt^n$. Ne segue che $ut^{m-n} = v$ 
+            dunque $m = n$ e di conseguenza $u = v$. \\
+            Viceversa, sia $R$ tale che esiste un elemento irriducibile $t$, tale che per ogni altro elemento $r \in R, r \neq 0$, esistono unici $u \in R$ invertibile 
+            e $n \in \N$ tali che $r = ut^n$. \\
+            Chiaramente $M = (t)$ è un ideale massimale, e se $r \in R$ non è invertibile, per ipotesi è in $M$; viceversa se in $M$ ci fosse un invertibile, allora 
+            $M = R$, ma questo è assurdo perché $t$ è irriducibile. Ne segue che $M$ contiene tutti e soli i non invertibili. Questo dimostra che $R$ è locale.\\
+            Inoltre, essendo $M$ l'unico ideale massimale, è principale perché generato da $t$. \\
+            Sia ora $I \ideal R$ non banale e diverso da $M$. Essendo $R$ locale, $I \subseteq M$. Sia $r \in I$ non nullo, allora esiste $u \in R$ invertibile tale che $r = ut^n$ 
+            per un opportuno naturale $n$. Sia $m = \min\{n \in \N : r = ut^n, r \in I, r \neq 0\}$. Dimostro che $I = (t^m)$.\\
+            Sia $r \in I$, allora $r = ut^n$ per opportuni $u \in R$ invertibile, $n \in \N, n \geq m$, dunque $r = ut^{n-m}t^m \in (t^m)$.\\
+            Viceversa, esiste $r \in I$ tale che $r = ut^m$, per un opportuno invertibile $u$, allora $t^m = u^{-1}r \in I$.
+        \end{proof}
+        Un anello che rispetta una (e quindi entrambe) delle condizioni del Lemma \ref{lem:DVR} è detto \emph{anello di valutazione discreta} e si scrive che è un DVR. 
+        Un elemento $t \in R$ come nella seconda condizione è detto \emph{parametro uniformizzante}. Parametri uniformizzanti distinti sono tra loro associati. \\
+        Sia ora $K$ il campo dei quozienti di $R$ e sia $t$ un parametro uniformizzante fissato: si osserva semplicemente che ogni elemento non nullo $z \in K$ ammette 
+        un'unica scrittura nella forma $z = ut^n$, dove $u$ è un'invertibile in $R$ e $n \in \Z$. L'esponente $n$ è detto \emph{ordine} di $z$ e si scrive $n = \ord(z)$.
+        Si pone $\ord(0) = \infty$. \\
+        L'ordine di un elemento di $K$ è ben definito, ovvero, non dipende dalla scelta del parametro uniformizzante.
+        \begin{proof}
+            Siano $t,s \in R$ due parametri uniformizzanti e sia $u \in R$ invertibile tale che $t = us$. Sia ora $z \in K$ (con le stesse notazioni di sopra), e siano 
+            $n_t,n_s$ gli ordini di $z$ calcolati a partire da $t$ e da $s$ rispettivamente. Allora, per un opportuno invertibile $v \in R$: \begin{equation*}
+                z = vt^{n_t} = v(us)^{n_t} = vu^{n_t}s^{n_t}
+            \end{equation*}
+            e per l'unicità della scrittura con il parametro uniformizzante, $n_t = n_s$.
+        \end{proof}
+        \begin{osservazione}
+            Vale che $R = \{z \in K : \ord(z) \geq 0\}$ e $M = \{z \in K : \ord(z) > 0\}$.
+        \end{osservazione}
+        \begin{definizione}
+            Sia $R$ un anello ed $M$ un insieme non vuoto, allora $M$ si dice $R$\emph{-modulo} se $M$ è dotato di una operazione $+$ rispetto alla quale è un gruppo abeliano 
+            ed esiste un'azione di $R$ su $M$, indicata come $\cdot: R \times M \to M$ tale che :
+            \begin{itemize}
+                \item $(a+b)m = am + bm,\,\forall a,b \in R, m \in M$;
+                \item $a(m+n) = am + an, \, \forall a \in R, m,n \in M$;
+                \item $(ab)m = a(bm), \, \forall a,b \in R, m \in M$;
+                \item $1_R m = m, \, \forall m \in M$.
+            \end{itemize}
+        \end{definizione}
+        Se $N \subseteq M$ è non vuoto, chiuso rispetto alla somma ed al prodotto per scalare, allora $N$ è detto \emph{sotto-}$R$\emph{-modulo} di $M$. Il sotto-$R$-modulo 
+        generato da $S \subseteq M$ è l'insieme $M(S) = \{\sum_{i=0}^k r_is_i : r_i \in R, s_i \in S \, \forall i \leq k, k \in \N\}$.\\
+        Sia ora $X$ un insieme qualsiasi e considero l'insieme $M_X = \{\gvf : X \to R \}$, con la somma definita puntualmente ed il prodotto per scalare definito anch'esso puntualmente. 
+        Allora $M_X$ è un $R$-modulo, ed è detto $R$\emph{-modulo libero su} $X$. Sia ora $x \in X$ e sia $\gvf_x \in M_X$ definita come $\gvf_x(y) = 0$, se $x \neq y$ e $\gvf_x(x) = 1$, 
+        allora $X \subseteq M_X$. \\
+        Siano $K \leq L$ campi. Indico l'estensione di campi con $\frac{L}{K}$
+        \begin{definizione}
+            Un elemento $x \in L$ si dice \emph{algebrico} su $K$, se esiste un polinomio $F \in K[X]$, tale che $F(x) = 0$, \emph{trascendente} altrimenti. Allora $K[x]$ è il più piccolo 
+            anello che contiene sia $K$ che $x$. Il suo campo dei quozienti è $K(x)$ ed è il più piccolo campo contenete sia $K$ che $x$.\\
+            L'estensione $\frac{L}{K}$ si dice \emph{algerbica} se ogni $x \in L$ è algebrico su $K$.
+        \end{definizione}
+        Osservo ora che $L$ ha una struttura di spazio vettoriale su $K$; allora, si dice che l'estensione $\frac{L}{K}$ è \emph{finita} se $[L:K] = \dim_KL$ è finita.
+        \begin{esercizio}\label{ex:fields}
+            Siano $K \leq L$ campi e sia $L$ un modulo finitamente generato su $K$. Allora per ogni anello $K \leq R \leq L$, $R$ è un campo.
+        \end{esercizio}
+        \begin{proof}
+            Sia $r \in R, r \neq 0$ un elemento algebrico su $K$, allora esiste un polinomio monico $F \in K[X]$ tale che $F(r) = 0$, sia $F(X) = \sum_{i=0}^n a_iX^i$. 
+            Considero il polinomio $G(X) = \sum_{i=0}^n a_iX^{n-i}$; allora $G(r^{-1}) = 0$, moltiplicando per $r^{1-n}$ e riordinando si trova che $r^{-1}$ è combinazione 
+            di elementi di $R$, dunque è in $R$. Se $r$ non è algerbico su $K$, il più piccolo modulo su $K$ che contiene $K[r]$ non è finitamente generato, ma $L$ contiene 
+            tale modulo ed $L$ è finitamente generato per ipotesi. Dunque un tale elemento non può esistere. Ne segue che $R$ è un campo.
+        \end{proof}
+        \begin{teorema}[Dell'elemento primitivo]
+            Sia $K$ un campo di caratteristica $0$, e sia $\frac{L}{K}$ un'estensione algerbica finita. Allora, esiste $\alpha \in L$, tale che $L = K(\alpha)$.
+        \end{teorema}
+        \begin{proof}
+            Una versione più generale di questo risultato è dimostrata in \cite{milneFT} Capitolo 5.
+        \end{proof}
+    
+        
+    \newpage
+    \section{Spazi affini e spazi proiettivi}\label{par:aff-proj}
+        Sia $k$ un campo. Uno \emph{spazio affine di dimensione} $n$ \emph{su} $k$ è una terna ordinata $\A = (A,V,+)$, dove $A$ è un insieme, detto insieme dei punti, 
+        $V$ è uno spazio vettoriale su $k$ di dimensione $n$, in biiezione insiemistica con $A$ e $+ : A \times V \to A$ è un'azione di $V$ su $A$ 
+        tale che, $P + v = P \iff v = 0, \, \forall P \in A$ e $\forall P,Q \in A$ esiste $v \in V$ tale che $P + v = Q$. \\
+        Se $A = V = k^n$, allora lo spazio $\A$ è detto \emph{spazio affine standard di dimensione} $n$ \emph{sul campo} $k$ e si denota con $\A^n(k)$, o anche con $\A^n$. 
+        In tal caso, $P \in \A^n$, si indica con $P = (x_1,\ldots,x_n)$ e queste sono dette coordinate di $P$.\\
+        Considero ora lo spazio vettoriale $k^{n+1}$. Definisco su $k^{n+1}$ la relazione $\sim$, 
+        definita per ogni $x,y \in k^{n+1}$ da $x \sim y \iff$ esiste $\lambda \in k, \lambda \neq 0$ tale che 
+        $x = \lambda y$. \\
+        La relazione definita è un'equivalenza su $k^{n+1}$. \begin{comment}
+        \begin{proof}
+            $\sim$ è riflessiva: per la scelta $\lambda = 1$, segue che per ogni $x \in k^{n+1}$ si ha $x = \lambda x$. \\
+            $\sim$ è simmetrica: per $x,y \in k^{n+1}$ tali che $x \sim y$, allora esiste $0 \neq \lambda \in k^{n+1}$ tale 
+            che $x = \lambda y$, da cui $y = \lambda^{-1}x$, e di conseguenza la simmetria di $\sim$. \\
+            $\sim$ è transitiva: se $x,y,z \in k^{n+1}$ sono tali che $x \sim y, y \sim z$, esistono $\lambda,\mu \in k$ 
+            entrambi non nulli, tali che $x = \lambda y, y = \mu z$, per cui $x = \lambda\mu z$, perciò $x \sim z$.
+        \end{proof} \end{comment}
+        Sia dunque $\P^n(k)$, o semplicemente $\P^n$, l'insieme quoziente $\frac{k^{n+1}}{\sim}$. Questo insieme è detto \emph{
+        spazio proiettivo} standard di dimensione $n$ sul campo $k$. I suoi elementi sono detti \emph{punti proiettivi}. Inoltre 
+        se $x = (x_1,\ldots,x_{n+1}) \in k^{n+1}$ e $P \in \P^n$ è la sua immagine nel quoziente si scrive $P = [x_1,\ldots,x_{n+1}]$ 
+        e si dice che $[x_1,\ldots,x_{n+1}]$ sono delle \emph{coordinate omogenee} del punto proiettivo $P$. \\
+        Fissato un sistema di coordinate omogenee su $\P^n$, considero, per ogni $i \leq n$, l'insieme $U_i = \{P = [x_1,\ldots,x_{n+1}] \in \P^n : x_i \neq 0 \footnote{Questa 
+        proprietà è indipendente dalla scelta delle coordinate omogenee.}\}$, e la mappa 
+        $\varphi_i : U_i \to \A^n$, definita da $\varphi_i([x_1,\ldots,x_{n+1}]) = (\frac{x_1}{x_i},\ldots,\frac{x_{i-1}}{x_i},\frac{x_{i+1}}{x_i},\ldots,\frac{x_n}{x_i})$, 
+        ciascuna di queste mappe è una biiezione.
+
+
+
+
+    \newpage
+    \section{Insiemi Algebrici}
+        Sia d'ora in poi $k$ un campo algebricamente chiuso di caratteristica $0$, e siano $\A^n,\P^n$ lo spazio affine e lo spazio proiettivo standard di dimensione $n$ su $k$.
+        \subsection{Caso Affine}
+            \begin{definizione}
+                Sia $S \subseteq k[X_1,\ldots,X_n]$, definisco \emph{l'insieme algebrico affine} $V(S) = \{P = (x_1,\ldots,x_n) \in \A^n : 
+                F(P) = 0 \forall F \in S\}$. Se $I \ideal k[X_1,\ldots,X_n]$ è l'ideale generato da $S$, vale che $V(I) = V(S)$. Un insieme 
+                algebrico affine $V$ è detto \emph{irriducibile} se non è unione di insiemi algebrici affini strettamente contenuti in $V$. 
+                Un insieme algebrico affine irriducibile è detto \emph{varietà affine}.
+            \end{definizione}
+            \begin{proposizione}
+                Unione finita di insiemi algebrici è un insieme algebrico. Intersezione arbitraria di insiemi algebrici è un insieme algebrico. $\emptyset,\P^n$ 
+                sono insiemi algebrici.
+            \end{proposizione}
+            \begin{proof}
+                La dimostrazione di questo fatto nel caso affine è analoga a quella del caso proiettivo nella proposizione \ref{prop:alg=clo}
+            \end{proof}
+            \begin{definizione}
+                Sia $X \subseteq \A^n$, definisco l'ideale associato ad $X$ come $I(X) = \{F \in k[X_1,\ldots,X_n] : F(P) = 0 \, \forall P \in X\}$.
+            \end{definizione}     
+            \begin{osservazione}
+                La definizione è ben posta, ovvero $I(X)$ è effettivamente un ideale per ogni $X$.
+            \end{osservazione}
+            \begin{proposizione}
+                Un insieme algebrico $V$ è irriducibile se e solo se $I(V)$ è un ideale primo.
+            \end{proposizione}
+            \begin{proof}
+                Sia $V$ irriducibile e siano $F,G \in k[X_1,\ldots,X_n]$ tali che $FG \in I(V)$. Allora, considero gli insiemi $V(F) = \{P \in V : F(P) = 0\}$ e $V(G) = \{
+                P \in V : G(P) = 0\}$. Chiaramente $V(F) \cup V(G) \subseteq V$. Inoltre siccome $FG \in I(V), F(P)G(P) = 0$, quindi per ogni $P \in V, F(P) = 0$ oppure $G(P)
+                = 0$, dunque $V \subseteq V(F) \cup V(G)$. \\
+                Ma $V$ è irriducibile, quindi $V = V(F)$ oppure $V = V(G)$, da cui $F \in I(V)$ oppure $G \in I(V)$. \\
+                Viceversa sia $V$ tale che $I(V)$ sia primo e siano $V_1,V_2 \subseteq V$ insiemi algebrici tali che $V = V_1 \cup V_2$. Se $V_1 = \emptyset$ oppure $V_2 = 
+                \emptyset$, allora l'altro è uguale a $V$ e non c'è nulla da dimostrare. Suppongo quindi $V_1 \neq \emptyset \neq V_2$. Allora $I(V) \subseteq I(V_1),I(V_2)
+                \Longrightarrow I(V) \subseteq I(V_1) \cap I(V_2)$. Viceversa: \begin{equation*}
+                    F \in I(V_1) \cap I(V_2) \Longrightarrow F(P) = 0 \forall P \in V_1 \cup V_2 = V \Longrightarrow F \in I(V)
+                \end{equation*}
+                Vale che $I(V) = I(V_1) \cap I(V_2)$. Sia $F \in I(V_1) \setminus I(V)$, allora, per ogni $G \in I(V_2)$, essendo $FG \in I(V)$ ed $F \notin I(V)$, allora, 
+                $G \in I(V)$, da cui $V_2 = V$.  
+            \end{proof}
+            Sia dunque $V \subseteq \A^n$ un insieme algebrico irriducibile e sia $I(V)$ il suo ideale primo associato. Allora considero l'anello $\gG(V) = 
+            \frac{k[X_1,\ldots,X_n]}{I(V)}$. Siccome $I(V)$ è primo, $\gG(V)$ è un dominio ed è detto \emph{anello coordinato associato} a $V$.\\
+            Siccome $\gG(V)$ è dominio, allora è ben definito il suo campo dei quozienti. Sia $k(V)$. Tale campo è detto \emph{campo delle funzioni razionali su} $V$.
+            Siano ora $P \in V, z \in k(V)$ fissati; si dice che $z$ è definita in $P$, se esistono $f,g \in \gG(V)$, tali che $z = \frac{f}{g}$ e $g(P) 
+            \neq 0$. Si definisce a questo punto $\cO_P(V) = \{z \in k(V) : z \text{ è definita in } P\}$. $\cO_P(V)$ è un anello locale, con ideale massimale $M_P(V) = \{
+            z \in \cO_P(V) : z(P) = 0\}$.
+        \subsection{Caso Proiettivo}
+            \begin{definizione}
+                Un punto $P \in \P^n$ si dice \emph{zero} del polinomio $\, F \in k[X_1,\ldots,X_{n+1}]$ se per ogni scelta $[x_1,\ldots,x_{n+1}]$ 
+                di coordinate omogenee per $P$, vale che $F(x_1,\ldots,x_{n+1}) = 0$, e si scrive $F(P) = 0$.
+            \end{definizione}
+            Vale il seguente:
+            \begin{lemma}
+                Sia $F \in k[X_1,\ldots,X_{n+1}]$ un polinomio di grado $d$, e siano $F_0,\ldots,F_d \in k[X_1,\ldots,X_{n+1}]$ polinomi omogenei tali che 
+                $F = \sum_{i=0}^d F_i$ e $F_i$ ha grado $i$. Allora un punto $P \in \P^n$ è zero di $F$ se e solo se è zero di $F_i$ per ogni $i$.
+            \end{lemma}
+            \begin{proof}
+                Suppongo che $P$ è uno zero di $F$, allora, se $[x_1,\ldots,x_{n+1}]$ sono coordinate omogenee per $P$, per ogni 
+                $\lambda \in k, \lambda \neq 0$, anche $[\lambda x_1, \ldots, \lambda x_{n+1}]$ sono coordinate omogenee per $P$. Dunque:
+                \begin{multline*}
+                    0 = F(x_1,\ldots,x_{n+1}) = F(\lambda x_1,\ldots,\lambda x_{n+1}) = \\
+                    = \sum_{i=0}^d F_i(\lambda x_1,\ldots,\lambda x_{n+1}) 
+                    = \sum_{i=0}^d \lambda^i F_i(x_1,\ldots,x_{n+1}) = G(\lambda)
+                \end{multline*}
+                Osservo ora che l'equazione polinomiale $G(t) = 0$ ha un numero infinito di soluzioni, dunque il polinomio $G$ è nullo, ovvero 
+                $F_i(x_1,\ldots,x_{n+1}) = 0$ per ogni scelta di coordinate omogenee $[x_1,\ldots,x_{n+1}]$ per $P$ per ogni $i$, da cui la tesi. \\
+                Viceversa, se $P$ è zero di $F_i$ per ogni $i$, per ogni scelta di coordinate proiettive $[x_1,\ldots,x_{n+1}]$ per $P$:
+                \begin{equation*}
+                    F(x_1,\ldots,x_{n+1}) = \sum_{i=0}^d F_i(x_1,\ldots,x_{n+1}) = 0
+                \end{equation*}
+            \end{proof}
+            Sia ora $S \subseteq k[X_1,\ldots,X_{n+1}]$, allora definisco $V(S) = \{P \in \P^n : F(P) = 0 \forall F \in S\}$. Chiaramente se $I$ è l'ideale 
+            generato da $S$, vale che: $V(I) = V(S)$. Un tale insieme è detto \emph{insieme algebrico proiettivo}.\\
+            Osservo ora che siccome $k[X_1,\ldots,X_{n+1}]$ è noetheriano, $I$ è finitamente generato, ovvero $I = (F^1,\ldots,F^r)$. Ciascuno degli $(F^i)_{i=1}^r$ 
+            può essere scritto come somma di polinomi omogenei nella forma $F^i = \sum_{j=0}^{d_i}F_j^i$, con $d_i$ grado di $F_i$ e $F_j^i$ polinomio omogeneo 
+            di grado $j$. Dunque $V(I) = V(F^1,\ldots,F^r) = V(F_j^i : j \in \{0,\ldots,d_i\}, i \in \{1,\ldots,r\})$.
+            \begin{definizione}
+                Un ideale $I \ideal k[X_1,\ldots,X_{n+1}]$ si dice \emph{omogeneo} se per ogni $F \in I, F = \sum_{i=0}^d F_i$, dove $d$ è il grado di $F$ e 
+                $F_i$ è un polinomio omogeneo di grado $i$ per ogni $i$, allora $F_i \in I$ per ogni $i$.
+            \end{definizione}
+            \begin{definizione}
+                Sia $X \subseteq \P^n$ pongo $I(X) = \{F \in k[X_1,\ldots,X_{n+1}] : F(P)=0 \forall P \in X\}$ l'ideale associato ad $X$.
+            \end{definizione} 
+            \begin{osservazione}
+                $I(X)$ è un ideale omogeneo per ogni $X \subseteq \P^n$.
+            \end{osservazione}
+            \begin{proposizione}
+                Un ideale $I \ideal k[X_1,\ldots,X_{n+1}]$ è omogeneo se e solo se è generato da un numero finito di polinomi omogenei
+            \end{proposizione}
+            \begin{proof}
+                Una dimostrazione di questo fatto è in \cite{fulton} Capitolo $4$, Paragrafo $2$.
+            \begin{comment}
+                Sia $I \ideal k[X_1,\ldots,X_{n+1}]$ omogeneo, e siano $F^1,\ldots,F^r$ polinomi che generano $I$, allora, se per ogni $1 \leq i \leq 
+                r, d_i$ è il grado di $F^i$ e $F^i = \sum_{i=0}^{d_i} F_j^i$ con $F_j^i$ polinomio omogeneo di grado $j$, allora, $I = (F_j^i : j \in 
+                \{0,\ldots,d_i\}, i \in \{1,\ldots,r\})$. \\
+                Viceversa, siano $(F^\alpha)_{\alpha \in A}$, con $A$ insieme finito, dei generatori omogenei per $I$. Sia $F \in I$, e sia $F = 
+                \sum_{i=m}^d F_i, F_i$ omogeneo di grado $i$. Siccome $F \in I$, esistono $B^{\alpha} \in k[X_1,\ldots,X_{n+1}]$ tali che $F = 
+                \sum_{\alpha \in A} B^{\alpha}F^{\alpha}$. \\
+                Denoto ora con $B_i^{\alpha}$ il monomio di grado $i$ del polinomio $B^{\alpha}$, e con $d_{\alpha}$ il grado del polinomio $F^{\alpha}$.\\
+                Uguagliando i gradi segue che $F_m = \sum_{\alpha \in A} B_{m-d_{\alpha}}^{\alpha}F^{\alpha}$, da cui $F_m \in I$.\\
+                Ne segue inoltre che $G = F - F_m \in I$ ed applicando lo stesso argomento a $G$, segue che $F_{m+1} \in I$. Per induzione si conclude.  
+            \end{comment}
+        \end{proof}
+        \begin{proposizione}\label{prop:alg=clo}
+            Unione finita di insiemi algebrici è un insieme algebrico. Intersezione arbitraria di insiemi algebrici è un insieme algebrico. $\emptyset,\P^n$ 
+            sono insiemi algebrici.
+        \end{proposizione}
+        \begin{proof}
+            Siano $S_1,S_2 \subseteq k[X_1,\ldots,X_{n+1}]$, dimostro che $V(S_1) \cup V(S_2) = V(S_1S_2)$: \\
+            Sia $P \in V(S_1) \cup V(S_2)$, allora $P \in V(S_1)$ oppure $P \in V(S_2)$, cioè $F(P) = 0 \forall F \in S_1$ oppure $G(P) = 0 \forall 
+            G \in S_2$. Ne segue che $\forall F \in S_1 \forall G \in S_2 \, FG(P) = F(P)G(P) = 0$, dunque $V(S_1) \cup V(S_2) \subseteq V(S_1S_2)$. \\
+            Viceversa sia $P \in V(S_1S_2)$ e suppongo per assurdo che $P \notin V(S_1) \cup V(S_2)$, ovvero che esistano $F \in S_1, G \in S_2$ tali che 
+            $F(P) \neq 0 \neq G(P)$, allora $0 = FG(P) = F(P)G(P)$, entrambi non nulli. Assurdo. \\
+            Per induzione segue il risultato per famiglie finite. \\
+            Sia ora $(S_{\alpha})_{\alpha \in A}$, con $A$ insieme arbitrario, tali che $S_{\alpha} \subseteq k[X_1,\ldots,X_{n+1}] \forall \alpha \in A$. 
+            Allora, $\cap_{\alpha \in A} V(S_{\alpha})$ è un insieme algebrico: chiaramente, \begin{equation*}
+                \bigcap_{\alpha \in A} V(S_{\alpha}) = V(\bigcup_{\alpha \in A}S_{\alpha})
+            \end{equation*}
+            e quest'ultimo è algebrico. Per dimostrare tale uguaglianza: \begin{equation*}
+                P \in \bigcap_{\alpha \in A} V(S_{\alpha}) \Longrightarrow \forall \alpha \in A \forall F \in S_{\alpha} F (P) = 0 \Longrightarrow \forall 
+                F \in \bigcup_{\alpha \in A}S_{\alpha} F(P) = 0
+            \end{equation*}. Viceversa: \begin{equation*}
+                P \in V(\bigcup_{\alpha \in A} S_{\alpha}) \Longrightarrow \forall F \in \bigcup_{\alpha \in A} S_{\alpha} F(P) = 0 \Longrightarrow \forall \alpha \in A \forall 
+                F \in S_{\alpha} F(P) = 0
+            \end{equation*}. \\
+            $\emptyset = \{P \in \P^n : 1 = 0\} = V(1)$ e $\P^n = \{P \in \P^n : 0 = 0\} = V(0)$.
+        \end{proof}
+        \begin{osservazione}\label{obs:Zar}
+            Gli insiemi algebrici, sia affini che proiettivi, sono dei chiusi per una topologia.
+        \end{osservazione}
+        Osservo ora che se $F \in k[X_1,\ldots,X_{n+1}]$ è un polinomio omogeneo, è ben definito, per ogni $i \leq n+1$ un polinomio in $n$ indeterminate, 
+        detto affinizzato di $F$ rispetto alla $i$-esima coordinata omogenea: $F_i(X_1,\ldots,\hat{X_i},\ldots,X_{n+1}) = F(X_1,\ldots,X_{i-1},1,X_{i+1},\ldots,X_n)$. 
+        $V = V(F), V_i = V(F_i) \forall i \leq n+1$, sono insiemi algebrici proiettivo e affini tali che $\forall i \leq n+1 \, \varphi_i(V \cap U_i) = V_i$.
+        Un insieme algebrico proiettivo $V = V(S) \subseteq \P^n, S \subseteq k[X_1,\ldots,X_{n+1}]$ si dice \emph{irriducibile} se non è unione di insiemi algebrici più piccoli. Un 
+        insieme algebrico irriducibile è detto \emph{varietà}. Vale anche in questo caso che $V$ è irriducibile se e solo se $I(V)$ è primo.\\
+        Sia dunque $V$ un insieme algebrico irriducibile proiettivo e sia $I(V)$ il suo ideale primo associato. Allora considero l'anello $\gG_h(V) = 
+        \frac{k[X_1,\ldots,X_{n+1}]}{I(V)}$. Siccome $I(V)$ è primo, $\gG_h(V)$ è un dominio ed è detto \emph{anello omogeneo associato} a $V$.\\
+        Un elemento di $\gG_h(V)$ è detto omogeneo se è immagine, tramite la proiezione, di un polinomio omogeneo in $k[X_1,\ldots,X_{n+1}]$. Indico la proiezione con $\pi_V$.
+        \begin{comment}
+        \begin{proposizione}
+            Ogni elemento $f \in \gG_h(V)$ si può scrivere in modo univoco come somma di omogenei tali che: $f = \sum_{i=0}^m f_i, f_i$ omogeneo di grado $i$.
+        \end{proposizione}
+        \begin{proof}
+            Sia $F \in k[X_1,\ldots,X_{n+1}]$, tale che $\pi(F) = f$, allora, $F = \sum_{i=0}^m F_i, F_i$ polinomio omogeneo di grado $i$. Dunque $f = \pi(F) = \pi(\sum_{i=0}^m
+            F_i) = \sum_{i=0}^m \pi(F_i) = \sum_{i=0}^m f_i$.\\
+            Per quanto riguarda l'unicità siano $f = \sum_{i=0}^m g_i, g_i$ omogeneo di grado $i$. Allora, esistono $G_i \in k[X_1,\ldots,X_{n+1}],G_i$ polinomio omogeneo di grado 
+            $i$ per ogni $i$, tali che $\pi(G_i) = g_i$ per ogni $i$, allora $F - \sum_{i=0}^m G_i = \sum_{i=0}^m F_i - G_i \in I(V)$ perché $\pi(F-\sum_{i=0}^m G_i) = 0$. Dunque, 
+            $f_i = g_i$ per ogni $i$.  
+        \end{proof}
+        \end{comment}
+        Siccome $\gG_h(V)$ è dominio, allora è ben definito il suo campo dei quozienti. Sia $k_h(V)$. Osservo ora che se $f,g \in \gG_h(V)$ sono omogenei dello stesso grado, 
+        il rapporto $\frac{f}{g}$ induce una funzione sui punti di $V$ sui quali $g$ non si annulla, infatti, fissato un punto $P \in V$ tale che $g(P) \neq 0$, fissate delle coordinate 
+        omogenee $\bar{x}$ per $P$, e detto $d$ il comune grado di $f$ e $g$, per ogni $\lambda \in k \setminus \{0\}$, quindi per ogni altra scelta di coordinate omogenee per $P$:
+        \begin{equation*}
+            \frac{f(\lambda x)}{g(\lambda x)} = \frac{\lambda^d f(x)}{\lambda^d g(x)} = \frac{f(x)}{g(x)}
+        \end{equation*}
+        Queste osservazioni portano a dare la seguente: \begin{definizione}
+            Il campo delle funzioni su $V$ è $k(V) = \{z \in k_h(V) : z = \frac{f}{g}, f,g \text{ omogenei di stesso grado}\}$. Gli elementi di $k(V)$ sono detti \emph{funzioni 
+            razionali su} $V$.
+        \end{definizione}
+        $k(V)$ è un sottocampo di $k_h(V)$. \\
+        Siano ora $P \in V, z \in k(V)$ fissati; si dice che $z$ è definita in $P$, se esiste una coppia di omogenei dello stesso grado $f,g$, tali che $z = \frac{f}{g}$ e $g(P) 
+        \neq 0$. Si definisce a questo punto $\cO_P(V) = \{z \in k(V) : z \text{ è definita in } P\}$. $\cO_P(V)$ è un anello locale, con ideale massimale $M_P(V) = \{
+        z \in \cO_P(V) : z(P) = 0\}$.\\
+        \begin{comment}
+        Considero ora brevemente il caso di un multispazio, ovvero uno spazio del tipo $\P^{n_1} \times \cdots \times \P^{n_r} = X$, per opportuni $n_1,\ldots,n_r \in \N$.
+        \begin{definizione}
+            Un polinomio $F \in k[X_{1,1},\ldots,X_{n_1,1},\ldots,X_{1,r},\ldots,X_{n_r,r}] = Y$ si dice omogeneo se è omogeneo rispetto ad ogni famiglia di indeterminate.\\
+            Un insieme algebrico in $X$ è $V(S)$, per un opportuno $S \subseteq Y$.
+        \end{definizione}
+        Valgono risultati e definizioni analoghi a quelli visti nel caso di insiemi affini e proiettivi.
+    \end{comment}
+
+    \newpage
+    \section{Curve Algebriche Piane} \label{par:plane-curves}
+        \subsection{Caso Affine}
+            Siano $F,G \in k[X,Y]$, tali polinomi si dicono equivalenti se esiste $\lambda \in k, \lambda \neq 0$ tale che $F = \lambda G$. Questa relazione è un'equivalenza su 
+            $k[X,Y]$.\\
+            Definisco una \emph{curva piana affine} come una classe di equivalenza di polinomi non costanti rispetto alla relazione introdotta. Dunque posso definire il grado di una curva come 
+            il grado di un polinomio (e quindi di tutti i polinomi) della classe di equivalenza.\\
+            Sia quindi una curva fissata ed $F$ un rappresentante. Se $F = \prod F_i^{e_i}$, con gli $F_i$ non costanti, irriducibili ed a due a due non associati, allora, si dice che 
+            $F_i$ è una \emph{componente della curva} $F$ \emph{di molteplicità} $e_i$. Se invece, $F$ è irriducibile, allora $V(F)$ è una varietà affine, dunque sono ben definiti $\gG(V(F)),
+            k(V(F)),\cO_P(V(F))$, e si indicano con $\gG(F),k(F),\cO_P(F)$.\\
+            Sia ora $F$ una curva e $P$ un suo punto. Si dice che $P$ è un \emph{punto semplice per} $F$ se $F_X(P) \neq 0$ o $F_Y(P) \neq 0$, dove $F_X,F_Y$ sono le derivate parziali di $F$. 
+            In tal caso, la retta $F_X(P)(X-x_P) + F_Y(P)(Y-y_P) = 0$, è detta retta tangente ad $F$ in $P$.\\
+            Suppongo ora che, a meno di una traslazione, $P = (0,0)$; allora $F = F_m + \cdots + F_n$, dove $n = \deg(F), F_i$ è polinomio omogeneo di grado $i$ in $k[X,Y]$, per ogni $i$ ed 
+            $F_m \neq 0$. Si definisce la \emph{molteplicità della curva} $F$ \emph{nel punto} $P$ come $m$ e si scrive $m_P(F) = m$. Infine siccome, $F_m$ è omogeneo in due variabili, può essere 
+            scritto nella forma $F_m = \prod_{i=1}^s L_i^{r_i}$, dove gli $L_i$ sono fattori lineari a due a due non associati. Gli $L_i$ sono le rette tangenti a $F$ in $P$ e ciascuna ha molteplicità 
+            $r_i$.
+            \begin{osservazione}
+                $P \in F \iff m_P(F) > 0$. Se $P$ è semplice $m_P(F) = 1$. Se $m_P(F) > 1, P$ è detto punto \emph{multiplo}. 
+            \end{osservazione}
+            \noindent
+            Il linguaggio degli anelli coordinati e degli anelli locali offre una diversa, ma equivalente caratterizzazione dei punti semplici e della molteplicità di una curva in un suo punto. 
+            Userò la seguente notazione: per $G \in k[X,Y], g$ è la sua immagine in $\gG(F) = \frac{k[X,Y]}{(F)}$.
+            \begin{proposizione}
+                Un punto $P \in F$ è semplice se e solo se $\cO_P(F)$ è un DVR. Inoltre se $L$ è una retta per $P$ che non è tangente in $P$ a $F$, allora $\l \in \cO_P(F)$ è un parametro uniformizzante. 
+            \end{proposizione}
+            \begin{proof}
+                Per la dimostrazione si veda \cite{fulton} Capitolo $3$, Paragrafo $2$.
+            \end{proof}
+            \begin{proposizione}
+                Sia $P \in F, F$ irriducibile. Allora $m_P(F) = \dim_k \frac{M_P(F)^n}{M_P(F)^{n+1}}$ per $n$ sufficientemente grande.
+            \end{proposizione}
+            \begin{proof}
+                Si veda \cite{fulton} Capitolo $3$, Paragrafo $2$.
+            \end{proof}
+            In particolare, da questo segue che la molteplicità di un punto dipende solo dal suo anello locale. Inoltre se $P$ è semplice, allora $\cO_P(F)$ è un DVR; sia $\ord_P^F$ la funzione ordine indotta su $k(F)$. \\
+            Siano ora $F,G$ curve piane e $P \in \A^2$. Si definisce la \emph{molteplicità di intersezione} di $F$ e $G$ in $P$ come $I(P,F \cap G) = \dim_k \frac{\cO_P(\A^2)}{(F,G)}$. La moltepilicità di intersezione gode 
+            delle seguenti proprietà: \begin{itemize}
+                \item $I(P,F\cap G)$ esiste per ogni coppia di curve e per ogni punto;
+                \item $I(P, F \cap G) \in \N$ se $F,G$ non hanno componenti comuni passanti per $P$, altrimenti, se $F,G$ hanno componenti comuni passanti per $P, I(P,F \cap G) = \infty$;
+                \item $I(P,F \cap G) = 0 \iff P \notin F \cap G$, e $I(P,F \cap G)$ dipende solo dalle componenti di $F$ e $G$ passanti per $P$;
+                \item Se $T$ è un cambio di coordinate affini, e $T(Q) = P$, allora $I(Q,F \cap G) = I(P, F^T \cap G^T)$;
+                \item $I(P,F \cap G) = I(P,G \cap F)$;
+                \item $I(P,F \cap G) \geq m_P(F)m_P(G)$ e vale l'uguaglianza se e solo se $F,G$ non hanno tangenti in $P$ in comune;
+                \item Se $F = \prod_{i=1}^p F_i^{r_i}, G = \prod_{j=1}^q G_j^{s_j}$, allora $I(P,F \cap G) = \sum_{i,j}r_is_jI(P,F_i \cap G_j)$;
+                \item $I(P,F \cap G) = I(P, F \cap (G + AF)), \, \forall A \in k[X,Y]$;
+                \item Se $P$ è un punto semplice di $F$, allora, $I(P,F \cap G) = \ord_P^F(G)$;
+                \item Se $F,G$ non hanno componenti comuni $\sum_{P \in \A^2} I(P,F \cap G) = \dim_k \frac{k[X,Y]}{(F,G)}$.
+            \end{itemize}
+        \subsection{Caso Proiettivo}
+            Siano $F,G \in k[X,Y,Z]$ due polinomi omogenei non-costanti. Allora, $F,G$ si dicono equivalenti se esiste $\lambda \in k, \lambda \neq 0$, tale che $F = \lambda G$. Questa è un'equivalenza 
+            tra i polinomi omogenei. Si definisce una \emph{curva piana proiettiva} come una classe di equivalenza. Il grado di una tale curva è il grado di un polinomio che la definisce.\\
+            Osservo ora che se $F$ è una curva proiettiva e $P = [x,y,1]$ è un suo punto, allora, $(x,y) \in \A^2$ è un punto della curva affine $F_*$, definita come $F_*(X,Y) = F(X,Y,1)$, ovvero
+            $F_*$ è \emph{l'affinizzato} di $F$. In particolare $\cO_P(F)$ è isomorfo a $\cO_{(x,y)}(F_*)$, dunque se $P \in U_3$ (o simmetricamente in $U_1$ o $U_2$), 
+            risulta ben definita la molteplicità in $P$ di $F$, grazie alla teoria delle curve affini.\\
+            In generale, dati dei punti $P_1,\ldots,P_n \in \P^2$, esiste una retta $L$ che non contiene alcuno di questi punti. Allora, a meno di un cambio di coordinate, posso supporre che questa retta 
+            sia la retta $Z$, quindi i $P_i$ hanno coordinate $[x_i,y_i,1]$. \\
+            Siccome c'è questa corrispondenza fra curve proiettive ed affini, risulta definita anche la molteplicità di intersezione di due curve proiettive in un punto. Una retta $L$ è detta \emph{tangente} 
+            ad una curva $F$ in un punto $P$ se $I(P,L \cap F) \geq m_P(F)$. Un punto multiplo è detto \emph{ordinario} se ammette $m_P(F)$ tangenti distinte.\\
+            \noindent
+            Enuncio ora due teoremi che saranno molto importanti nel seguito. \\
+            \begin{teorema}[di Bezout]
+                Siano $F,G$ curve piane proiettive prive di componenti comuni. Sia $n = \deg(F), m = \deg(G)$. Allora $\sum_{P \in \P^2}I(P,F \cap G) = mn$.
+            \end{teorema}
+            \begin{proof}
+                Si veda \cite{fulton} Capitolo $5$, Paragrafo $3$.
+            \end{proof}
+            \begin{definizione}
+                Siano $F,G$ due curve passanti per $P$ prive di componenti comuni per $P$ e sia $H$ un'altra curva. Allora, si dice che \emph{le condizioni di Noether sono soddisfate in }$P$ 
+                \emph{rispettivamente a} $F,G,H$ se $H_* \in (F_*,G_*) \subseteq \cO_P(\A^2)$.
+            \end{definizione}
+            \begin{teorema}[Fondamentale di Noether]
+                Siano $F,G,H$ curve piane proiettive. Suppongo che $F,G$ non abbiano componenti comuni. Allora esistono $A,B \in k[X,Y,Z]$ omogenei tali che $H = AF + BG$ se e solo se le condizioni di Noether 
+                sono soddisfatte in $P$, per ogni $P \in F \cap G$. 
+            \end{teorema}
+            \begin{proof}
+                Si veda \cite{fulton} Capitolo $5$, Paragrafo $5$.
+            \end{proof}
+
+    \newpage
+    \section{Varietà, Morfismi e Mappe Razionali}
+        A questo punto risulta utile definire una topologia su $\P^n$(e su $\A^n$): la \emph{topologia di Zariski}, definita per ogni $U \subseteq \P^n$, come $U$ è un aperto se e solo se 
+        $\P^n \setminus U$ è un insieme algebrico. Per l'Osservazione \ref{obs:Zar}, quella definita è effettivamente una topologia. 
+        Sia ora $V$ un insieme algebrico irriducibile, e considero su $V$ la topologia indotta dalla topologia di Zariski. Siano $U_1,U_2 \subseteq V$ due aperti, allora, $U_1 
+        \cap U_2 \neq \emptyset$ perché altrimenti, $V = (V \setminus U_1) \cup (V \setminus U_2)$, sarebbe riducibile. Ne segue che per ogni coppia di punti distinti $P,Q \in 
+        V$ i loro intorni non sono mai disgiunti. Ne segue che $\P^n$ con la topologia di Zariski non è uno spazio Hausdorff.\\
+        %La topologia di Zariski è ben definita anche nei multispazi.
+        \begin{definizione}
+            Sia $V \subseteq \P^n$ un insieme algebrico irriducibile, e sia $X \subseteq V$ un aperto. $X$ è detto varietà. Analogamente risultano definite le varietà per insiemi affini. %ed in mutlispazi.
+        \end{definizione}
+        Analogamente a quanto visto per gli insiemi algebrici, possiamo definire le funzioni razionali su $X$ varietà, come $k(X) = \{f_{\restriction_X} : f \in k(V)\}$, ed analogamente, 
+        per $P \in X, \cO_P(X) = \{f \in k(X) : f \text{ è definita in } P\}$.\\
+        Se $U \subseteq X$ è aperto, allora $U$ è aperto in $V$, dunque è una varietà ed è detto \emph{sottovarietà aperta} di $X$.\\
+        Sia ora $Y \subseteq X$ un chiuso, allora, $Y$ si dice irriducibile se non è unione di due suoi sottoinsiemi propri e chiusi in $X$. Se $Y$ è irriducibile, allora, detta $\bar{Y}$ 
+        la sua chiusura in $V$, $Y = \bar{Y} \cap X$ è un aperto di $\bar{Y}$, quindi è una varietà di $\bar{Y}$, ed è detta \emph{sottovarietà chiusa} di $X$.
+        Analoghe definizioni valgono nel caso affine. \\
+        Sia ora $U \subseteq X$ un aperto non vuoto; definisco $\gG(U) = \{f \in k(X) : f \text{ è definita in ogni punto } P \in U\} = \cap_{P \in U} \cO_P(X)$. \\
+        Considero dunque l'anello $\cI(U,k)$ delle mappe da $U$ a $k$.
+        \begin{lemma}\label{lem:gamma-cont}
+            Sia $X$ una varietà proiettiva e sia $U$ un suo sottoinsieme aperto. Sia $z \in \gG(U)$ tale che $z(P) = 0$ per ogni $P \in U$. Allora $z = 0$.
+        \end{lemma}
+        \begin{proof}
+            Sia $z \in \gG(U)$, allora $z \in k(X)$ e $z$ è definita in ogni punto di $U$; cioè $z = \frac{f}{g}, f,g \in \gG_h(X)$ omogenei dello stesso grado, con $g(P) \neq 0 \forall P \in U$.
+            Allora $f(P) = 0 \forall P \in U$. \\
+            Dimostro ora che $z = \frac{f}{g} : U \to k$ è una funzione continua se considero su $U$ la topologia indotta dalla topologia di Zariski e su $k$ la topologia di Zariski, una volta 
+            identificato $k = \A^1(k) = \A^1$. Sia un chiuso $A \subseteq \A^1$ un chiuso, allora, è un insieme finito. Dunque siccome le antiimmagini commutano con le unioni è sufficiente dimostrare 
+            che $z^{-1}(a)$ è un chiuso per ogni $a \in \A^1 = k$. \begin{multline*}
+                z^{-1}(a) = \{P \in U : z(P) = a\} = \{P \in U : f(P) -ag(P) = 0\} = \\ = \{P \in U : F(P) - aG(P) = 0\} = V(F-aG) \cap U
+            \end{multline*}
+            dove $F,G$ sono polinomi omogenei che vengono mappati in $f,g$ nel quoziente $\gG_h(X)$. In particolare, $z^{-1}(a)$ è algebrico quindi chiuso.\\
+            Infine essendo quindi $z$ continua, ed essendo $U$ denso per la topologia di Zariski, $z(X) = z(\bar{U}) \subseteq \bar{0} = 0$. Ne segue $z = 0$.
+        \end{proof}
+        Siccome quindi la mappa $\gG(U) \to \cI(U,k)$ è una mappa iniettiva, posso identificare $\gG(U)$ con la sua immagine. \\
+        D'ora in poi con varietà intenderò sia insiemi algebrici proiettivi (o affini) irriducibili, sia quelle che ho chiamato sottovarietà (aperte e chiuse) sia affini che proiettive. 
+        Siano quindi $X,Y$ varietà e sia $\varphi: X \to Y$ una mappa insiemistica. Allora è ben definito l'omomorfismo d'anelli, $\tilde{\varphi}: \cI(Y,k) \to \cI(X,k)$ definito per 
+        ogni funzione $f \in \cI(Y,k)$ da $\tilde{\varphi}(f) = f \circ \varphi$.
+        \begin{definizione}
+            Una mappa $\varphi: X \to Y$, con $X,Y$ varietà è detta \emph{morfismo}, se:\begin{enumerate}
+                \item $\varphi$ è continua rispetto alle topologie di Zariski su $X$ e $Y$;
+                \item per ogni aperto $U \subseteq Y$ e per ogni $f \in \gG(U)$, allora $f \circ \varphi \in \gG(\varphi^{-1}(U))$.
+            \end{enumerate}
+            Un \emph{isomorfismo} è un morfismo $\varphi$ che è invertibile e $\varphi^{-1}$ è un morfismo.
+        \end{definizione}
+        \begin{definizione}
+            Siano $V \subseteq \A^n, W \subseteq \A^m$; una mappa $p : V \to W$ è una \emph{mappa polinomiale} se $p = (p_1,\ldots,p_m)$ e $p_i \in k[X_1,\ldots,X_n] \, \forall i$. 
+        \end{definizione}
+        D'ora in poi mi userò la seguente nomenclatura: dirò che una varietà è affine se è isomorfa ad una varietà in uno spazio affine.
+        \begin{proposizione}\label{prop:morph}
+            Siano $X$,$Y$ varietà affini. Allora esiste una corrispondenza iniettiva fra morfismi $\varphi : X \to Y$ ed omomorfismi $\tilde{\varphi} : \gG(Y) \to \gG(X)$. In particolare, 
+            un morfismo di $X \subseteq \A^n$ in $Y \subseteq \A^m$ è equivalente ad una mappa polinomiale.
+        \end{proposizione}
+        \begin{proof}
+            Si veda \cite{fulton} Capitolo $6$, Paragrafo $3$.
+        \end{proof}
+        \begin{comment}
+        \begin{proof}
+            Siano $X \subseteq \A^n,Y \subseteq \A^m$ varietà. Allora, la dimostrazione discende dai seguenti fatti: \begin{itemize}
+                \item una mappa polinomiale è un morfismo;
+                \item un morfismo $\varphi : X \to Y$ induce un omomorfismo $\tilde{\varphi} : \gG(Y) \to \gG(X)$;
+                \item ogni omomorfismo $\tilde{\varphi} : \gG(Y) \to \gG(X)$ è indotto da una mappa polinomiale;
+            \end{itemize}
+            Dimostro che una mappa polinomiale tra $X$ e $Y$ è un morfismo: siano $p_1,\ldots,p_m \in k[X_1,\ldots,X_n]$ tali che la mappa polinomiale associata $p : X \to Y$ sia ben definita. $p$ è un morfismo. \\
+            $p$ è continua per la topologia di Zariski: sia $A \subseteq Y$ un chiuso, allora esiste $S \subseteq k[Y_1,\ldots,Y_m]$ tale che $A = V(S) \cap Y$; \begin{multline*}
+                p^{-1}(A) = \{P \in X : p(P) \in A\} =  \\
+                = \{P \in X : F(p(P)) = 0  \forall F \in S\} = V(S_p) \cap  X
+            \end{multline*}
+            Dove $S_p$ è l'insieme definito come  $\{F(p_1(X_1,\ldots,X_n),\ldots,p_m(X_1,\ldots,X_n)) : F \in S\}$; siccome $p_1,\ldots,p_m$ sono polinomi e gli elementi di $S$ anche , segue che $S_p \subseteq 
+            k[X_1,\ldots,X_n]$, da cui $p^{-1}(A)$ è un chiuso. \\
+            Sia $f \in \gG(Y)$ allora $f$ è immagine in un anello quoziente di un polinomio $F$, allora $\tilde{p}(f) = f \circ p$ è l'immagine nello stesso quoziente del polinomio $F(p_1(X_1,\ldots,X_n),\ldots,p_m(X_1,\ldots,X_n))$ 
+            dunque è in $\gG(X)$, perché la mappa polinomiale $p$ è ben definita. Questo dimostra che $p$ è un morfismo.\\
+            Sia ora $\varphi : X \to Y$ un morfismo; allora è ben definita la mappa insiemistica $\tilde{\varphi} : \gG(Y) \to \gG(X)$. Dimostro che $\tilde{\varphi}$ è omomorfismo. \\
+            $\tilde{\varphi}(1) = 1 \circ \varphi = 1 \in \gG(X)$. $f,g \in \gG(Y)$, allora , per ogni $P \in X$: \begin{equation*}
+                \tilde{\varphi}(f+g)(P) = (f+g) \circ \varphi (P) = f(\varphi(P)) + g(\varphi(P)) = \tilde{\varphi}(f)(P) + \tilde{\varphi}(g)(P) 
+            \end{equation*}
+            Analogamente: \begin{equation*}
+                \tilde{\varphi}(fg)(P) = (fg) \circ \varphi (P) = f(\varphi(P)g(\varphi(P))) = \tilde{\varphi}(f)(P)\tilde{\varphi}(g)(P)
+            \end{equation*}
+            Questo prova che $\tilde{\varphi}$ è un omomorfismo. \\ 
+            Dimostro che ogni per ogni omomorfismo $\tilde{\varphi} : \gG(Y) \to \gG(X)$ esiste una mappa polinomiale $\varphi : X \to Y$ tale che $\tilde{\varphi}$ sia l'omomorfismo associato a $\varphi$.
+            Sia $\tilde{\varphi}$ fissato e sia, per ogni $i \in {1,\ldots,m}$, $p_i \in k[X_1,\ldots,X_n]$ tale che $\tilde{\varphi}(\pi_Y(Y_i)) = \pi_X(p_i)$. Allora $\varphi : X \to Y$ che associa a $P, \varphi(P) = 
+            (p_1(P),\ldots,p_m(P)) \in Y$ è una mappa polinomiale di $X$ in $Y$ e, per costruzione è tale che $\tilde{\varphi}(f) = f \circ \varphi$ per ogni $f \in \gG(Y)$. \\
+            Sia ora $\varphi : X \to Y$ un morfismo e sia $\tilde{\varphi} : \gG(Y) \to \gG(X)$ l'omomorfismo indotto. Per quanto appena visto esiste una mappa polinomiale $p : X \to Y$ tale che l'omomorfismo 
+            indotto da $p$ è $\tilde{\varphi}$. Allora, per ogni $f \in \gG(Y), f \circ \varphi = f \circ p$; quindi: \begin{equation*}
+                \forall f \in \gG(Y) \forall F \in \pi_Y^{-1}(f) \pi_Y(F) \circ \varphi = \pi_Y(F) \circ p = \pi_X(F \circ p)
+            \end{equation*}
+            Quindi le funzioni $F \circ \varphi, F \circ p$, come funzioni da $X$ in $k$, sono uguali per ogni $F \in k[Y_1,\ldots,Y_m]$, ne segue $\varphi = p$.
+        \end{proof}
+    \end{comment}
+    \begin{esempio}
+        Fissato $V \subseteq \P^n$, una varietà, $U_i,\varphi_i, i \{1,\ldots,n+1\}$ gli aperti e le mappe definiti in \ref{par:aff-proj}. Siano inoltre $V_i = V \cap U_i, 
+        \tilde{V_i} = \varphi_i(V_i)$, allora $\varphi_i : V_i \to \tilde{V_i}$ è isomorfismo per ogni $i$, quindi ogni varietà proiettiva è unione di sottovarietà aperte isomorfe a varietà affini.
+    \end{esempio}
+    \begin{definizione}
+        Sia $K$ un'estensione di $k$ generata aggiungendo a $k$ un numero finito di elementi. Si dice grado di trascendenza di $K$ su $k$, e si denota con $\text{tr.deg}_kK$, il più piccolo intero $n$, tale che esistono 
+        $x_1,\ldots,x_n \in K$, tali che $K$ è algebrico su $k(x_1,\ldots,x_n)$. In tal caso si dice che $K$ è un campo di funzioni algebriche in $n$ variabili su $k$.
+    \end{definizione}
+    \begin{proposizione} \label{prop:fun-fields}
+        Sia $K$ un campo di funzioni algebriche in una variabile su $k$, tale che per ogni $t \in K$, tale che $K$ è algebrico su $k(t)$, allora l'estensione $\frac{K}{k(t)}$ è finita e sia $x \in K \setminus k$. Allora: \begin{enumerate}
+            \item $K$ è algebrico su $k(x)$;
+            \item Esiste un elemento $y \in K$ tale che $K = k(x,y)$.
+        \end{enumerate}
+    \end{proposizione}
+    \begin{proof}
+        Sia $t \in K$ tale che $K$ è estensione algebrica di $k(t)$; allora esiste un polinomio $F \in k(t)[X]$ tale che $F(t,x) = 0$. In particolare, siccome $x$ non è algebrico su $k$, perché $k$ è algebricamente chiuso, allora $t$ compare 
+        in $F(t,x)$. Allora, moltiplicando gli eventuali denominatori, posso concludere che esiste $G \in k(x)[T]$ tale che $G(x,t) = 0$, da cui $t$ è algebrico su $k(x)$, ma allora $k(x,t)$ è algebrico su $k(x)$ e di conseguenza lo è $K$. \\
+        Siccome $K$ è algebrico su $k(x)$, allora l'estensione è algebrica e finita, quindi ammette elemento primitivo, ovvero esiste $y \in K$ tale che $K = k(x,y)$.
+    \end{proof}
+    Se $X$ è una varietà, allora, $k(X)$ è un'estensione di $k$ finitamente generata. Si definisce allora $\text{dim}(X) = \text{tr.deg}_kk(X)$. Una varietà di dimensione $1$ è detta curva.
+    \begin{osservazione}
+        Una curva secondo questa definizione è irriducibile, mentre una curva piana definita come in \ref{par:plane-curves} può essere riducibile.
+    \end{osservazione}
+    \begin{proposizione}
+        \begin{enumerate}
+            \item Se $U$ è una sottovarietà aperta di $X$, allora $\dim(U) = \dim(X)$;
+            \item Se $V$ è la chiusura proiettiva di una varietà affine $V'$, allora $\dim(V) = \dim(V')$;
+            \item Una varietà ha dimensione zero se e solo se è un punto;
+        \end{enumerate}
+    \end{proposizione}
+    \begin{proof}
+        I primi due punti discendono dal fatto che i campi di funzioni coincidono.\\
+        Sia ora $V$ una varietà di dimensione zero: per i primi due punti possiamo supporre sia affine; allora siccome $k(V)$ è algebrico su $k$, ma $k$ è algebricamente chiuso, segue che $k(V) = k$. 
+        In particolare $\gG(V) = k$, quindi i resti modulo $I(V)$ sono solo costanti, quindi $I(V)$ è generato da $n$ polinomi di primo grado linearmente indipendenti su $k$, che si annullano in $V$, 
+        ma quindi $V$ è un unico punto in $\A^n$. Il viceversa è ovvio.
+    \end{proof} 
+    \begin{definizione}
+        Siano $X,Y$ varietà, due morfismi $f_1 : U_1 \to Y, f_2 : U_2 \to Y$, con $U_1,U_2 \subseteq X$ aperti, si dicono equivalenti se le loro restrizioni a $U_1 \cap U_2$ coincidono.
+    \end{definizione}
+    Siccome $U_1 \cap U_2$ è denso in $X$, $f_1,f_2$ sono determinati dalle loro restrizioni su $U_1 \cap U_2$. Questa relazione è effettivamente una relazione di equivalenza fra i morfismi. Una classe di equivalenza di morfismi è una 
+    coppia $(U,f)$ dove $U \subseteq X, U = \cup_{\alpha} U_{\alpha}, U_{\alpha}$ dominio di un singolo morfismo, $f : U \to Y$ definita da $P \in U \Longrightarrow P \in U_{\alpha} \exists \alpha, f(P) = f_{\alpha}(P)$, con $f_{\alpha}$ 
+    morfismo di dominio $U_{\alpha}$. Siccome morfismi equivalenti coincidono sulle intersezioni dei rispettivi domini, la definizione di $f$ è ben posta. $f$ è detta \emph{mappa razionale} ed $U$ è il suo dominio.
+    \begin{definizione}
+        Una mappa razionale $f : U \to Y, U \subseteq X$ è detta \emph{dominante} se $f(U)$ è denso in $Y$.\\
+        Siano $A,B$ anelli locali tali che $A \leq B$; si dice che $B$ \emph{domina} $A$, se l'ideale massimale di $B$ contiene l'ideale massimale di $A$. 
+    \end{definizione}
+    \begin{proposizione}\label{prop:techn1}
+        Siano $X,Y$ varietà e sia $F : X \to Y$ una mappa razionale dominante. Siano $U \subseteq X, V \subseteq Y$ aperti tali che $f : U \to V$ è un morfismo che rappresenta $F$. Allora: \begin{enumerate}
+            \item l'omomorfismo indotto $\tilde{f} : \gG(V) \to \gG(U)$ è iniettivo, quindi si estende unicamente ad un omomorfismo di $k(V) = k(Y)$ in $k(U) = k(X)$; inoltre è indipendente dalla scelta di $f$, quindi si denota con $\tilde{F}$;
+            \item se $P$ è nel dominio di $F, F(P) = Q$, allora $\cO_P(X)$ domina $\tilde{F}(O_Q(Y))$; viceversa se $\cO_P(X)$ domina $\tilde{F}(\cO_Q(Y))$ per oppurtuni $P \in X, Q \in Y$, allora $P$ è nel dominio di $F$ e $F(P) = Q$;
+            \item ogni omomorfismo di $k(Y)$ in $k(X)$ è indotto da un un'unica mappa razionale dominante di $X$ in $Y$.
+         \end{enumerate}
+    \end{proposizione}
+    \begin{proof}
+        Si veda \cite{fulton} Capitolo $6$, Paragrafo $6$.
+    \end{proof}
+    \begin{comment}
+    \begin{proof}
+        Siano $f_1,f_2 \in \gG(Y)$ tali che $\tilde{f}(f_1) = \tilde{f}(f_2)$, allora vale che per ogni $P \in f(U), f_1(P) = f_2(P)$, ma $f(U)$ è denso per ipotesi e, per la dimostrazione del \ref{lem:gamma-cont} le funzioni $f_1 = f_2$. 
+        Siccome l'omomorfismo di anelli è iniettivo, può essere esteso ad un omomorfismo di campi. \\ Siano $f : U_f \to V_f,g : U_g \to V_g$ due morfismi che rappresentano $F$, allora considero $h : U_h = U_f \cap U_g \to V_h = f(U_f \cap U_g) = g(U_f \cap U_g)$.
+        $h$ è ben definita perché $f,g$ sono equivalenti, inoltre, $\tilde{f} = \tilde{h}$ perché $h$ è restrizione di $f$ e $\gG(U_f) = \gG(U_f)$. Analogamente per $\tilde{g} = \tilde{h}$. \\
+        Sia $P$ nel dominio di $F$ e sia $F(P) = Q$. $\cO_P(X)$ è anello locale e siccome $\tilde{F}$ è omomorfismo, anche $\tilde{F}(\cO_Q(Y))$ lo è. Se $\tilde{\varphi} \in \tilde{F}(\cO_Q(Y))$, allora $\tilde{\varphi} = \varphi \circ f$, dove $f$ 
+        rappresenta $F$ e $\varphi \in \cO_Q(Y)$, allora, $\tilde{\varphi}(P) = \varphi(f(P)) = \varphi(Q)$, quindi $\tilde{\varphi}$ è definita in $P$, da cui $\tilde{F}(\cO_Q(Y)) \leq \cO_P(X)$. \\
+        Sia $M_P$ l'ideale massimale di $\cO_P(X)$ e $\tilde{M_Q}$ l'ideale massimale di $\tilde{F}(\cO_Q(Y))$. Allora sia $\tilde{\gvf} \in \tilde{F}(\cO_Q(Y))$, allora esiste $\gvf \in \cO_Q(Y)$ non invertibile tale che $\tilde{\gvf} = \gvf \circ f$, dove 
+        $f$ rappresenta $F$. Allora, $\tilde{\gvf}(P) = \gvf(Q) = 0$, dunque è non invertibile. $\tilde{\gvf} \in M_P$. \\
+        Viceversa siano $P \in X, Q \in Y$, tale che $\cO_P(X)$ domina $\tilde{F}(\cO_Q(Y))$. Considero intorni affini $V$ di $P$, $W$ di $Q$. Sia $\gG(W) = k[y_1,\ldots,y_n]$, allora $\tilde{F}(y_i) = \frac{a_i}{b_i}, a_i,b_i \in \gG(V), b_i(P) \neq 0 \forall i$. 
+        Sia $b = b_1 \cdots b_n$, allora $\tilde{F}(\gG(W)) \subseteq \gG(V_b) = \gG(V)[\frac{1}{b}], V_b = \{P \in V : b(P) \neq 0\}$. \\
+        Ne segue che l'omomorfismo $\tilde{F} : \gG(W) \to \gG(V_b)$ è ben definito, dunque per la Proposizione \ref{prop:morph} è indotta da un unico morfismo $f : V_b \to W$. \\
+        Sia quindi $g \in \gG(W)$ che si annulla in $Q$, allora $\tilde{F}(g)$ si annulla in $P$, e di conseguenza $f(P) = Q$. \\
+        Suppongo ora $X,Y$ affini, allora per ogni omomorfismo $\gvf : k(Y) \to k(X), \gvf(\gG(Y)) \subseteq \gG(X_b)$, per un opportuno $b \in \gG(X)$, allora $\gvf$ è indotta da un morfismo $f : X_b \to Y$, e $f(X_b)$ è denso. \\
+        Dimostro la densità di $f(X_b)$: $\gvf$ iniettivo perché estensione di $\tilde{F}$, che è dominante quindi per ogni coppia di funzioni $g,h \in k(Y), g \circ \gvf = h \circ \gvf \Longrightarrow g = h$. Ciò avviene se e solo se 
+        l'uguaglianza di $g,h$ su $f(X_b)$ implica l'uguaglianza di $g,h$ per ogni coppia di funzioni, ma questo è vero solo se $X_b$ è denso. 
+    \end{proof}
+    \end{comment}
+    Una mappa razionale di $X$ in $Y$ è detta birazionale se esistono degli aperti $U \subseteq X, V \subseteq Y$ ed un isomorfismo $f : U \to V$ che rappresenta $F$. Due varietà tra cui esiste una mappa birazionale, si dicono birazionalmente equivalenti. Ad esempio ogni 
+    varietà è birazionalmente equivalente ad ogni sua sottovarietà aperta. 
+    \begin{proposizione}
+        Due varietà sono birazionalmente equivalenti se e solo se i loro campi di funzioni sono isomorfi
+    \end{proposizione}
+    \begin{proof}
+        Che due varietà birazionalmente equivalenti abbiano campi di funzioni isomorfi è ovvio. \\
+        Viceversa, se $\gvf : k(Y) \to k(X)$ è un isomorfismo, allora, per la dimostrazione della Proposizione \ref{prop:techn1} $\gvf(\gG(X)) \subseteq \gG(Y_b)$ per un opportuno $b \in \gG(Y)$ e $\gvf^{-1}(\gG(Y)) \subseteq \gG(X_d)$ per un opportuno $d \in \gG(X)$. 
+        Allora $\gvf$ si restringe ad un isomorfismo tra $\gG((Y_b)_{\gvf^{-1}(d)})$ e $\gG((X_d)_{\gvf(b)})$, che è generato da un unico morfismo $f : (X_d)_{\gvf(b)} \to (Y_b)_{\gvf^{-1}(d)}$.
+    \end{proof}
+    \begin{corollario}
+        Ogni curva è birazionalmente equivalente ad una curva piana.
+    \end{corollario}
+    \begin{proof}
+        Sia $V$ una curva allora, per la proposizione \ref{prop:fun-fields}, esistono $x,y \in k(V)$ tali che $k(V) = k(x,y)$. Considero perciò il naturale omomorfismo d'anelli da $k[X,Y]$ in $k[x,y]$, e sia $I$ il suo nucleo. In particolare, essendo $V$ irriducibile, $I$ è primo, 
+        dunque $V' = V(I) \subseteq \A^2$ è una varietà. Inoltre, $\gG(V') = \frac{k[X,Y]}{I}$ è isomorfo a $k[x,y]$, quindi $k(V')$ è isomorfo, a $k(V)$, quindi per la proposizione precedente le due varietà sono birazionalmente equivalenti. Per vedere che $V'$ è una curva è 
+        sufficiente osservare che essendo $k(V),k(V')$ isomorfi, $\text{dim}V' = \text{dim}V = 1$.
+    \end{proof}
+    \begin{esercizio} \label{ex:dm}
+        Siano $C,C'$ curve e sia $F$ una mappa razionale tra $C$ e $C'$. Allora $F$ è dominante oppure è costante. Inoltre se $F$ è dominante, $k(C)$ è un'estensione algebrica finita di $\tilde{F}(k(C'))$.
+    \end{esercizio}
+    \begin{proof}
+        Se $F$ è dominante allora non c'è niente da dimostrare. \\
+        Sia quindi $F$ non dominante, e sia $f : U \to V$ morfismo che rappresenta $F$. Allora, siccome $F$ non è dominante, $f(U)$ è non vuoto e non è denso in $C'$. Esiste perciò $\emptyset \neq V \subseteq C'$ aperto tale che $f(U) \cap V = \emptyset \Longrightarrow f(U) \subseteq C' 
+        \setminus V$ che è algebrico, quindi è una sottovarietà chiusa di $C'$ e siccome $f(U) \neq \emptyset$ è non banale ovvero è un punto. Ne segue $f(U) = \{P\}$ per un opportuno $P \in C'$. Essendo $U$ denso in $C$ segue la tesi. \\
+        Sia ora $F$ dominante allora $\tilde{F}$ è un omomorfismo non banale di campi, dunque $L = \tilde{F}(k(C'))$ è isomorfo a $k(C')$. Sia $L$ che $k(C)$ sono campi di funzione in una variabile su $k$. Dunque per la proposizione \ref{prop:fun-fields} esistono $x,y \in k(C), t,s \in L$, 
+        nessuno dei quattro in $k$ tali che $k(C) = k(x,y), L = k(t,s)$. Sempre per la Proposizione \ref{prop:fun-fields} $k(C)$ è estensione algebrica finita di $L$: basta aggiungere $x,y$, quando non già presenti.
+    \end{proof}
+
+\newpage
+\section{Scoppiamento di punti affini e proiettivi, Trasformazioni quadratiche e Modello non-singolare}
+    Sia $C$ una curva arbitraria e sia $P$ un suo punto. $P$ è detto punto semplice se  $\cO_P(C)$ è un DVR.\\
+    Sia quindi $\ord_P^C$ la funzione d'ordine su $k(C)$ associata a $\cO_P(C)$. Se ogni punto di $C$ è semplice, la curva è detta \emph{non-singolare}.
+    \begin{definizione}
+        Siano $k \leq K$ campi; un sottoanello $A$ di $K$ è detto \emph{anello locale di} $K$, se $A$ è un anello locale, $K$ è il campo dei quozienti di $A$ e $k \leq A$. Analogamente si dice che $A$ è un  \emph{anello di valutazione discreta di} $K$ se $A$ è un anello locale 
+        di $K$ ed è un DVR.
+    \end{definizione}
+    \begin{proposizione} \label{prop:techn2}
+        Sia $C$ una curva proiettiva e sia $K = k(C)$. Sia inoltre $L$ un campo contenente $K$ ed $R$ un DVR di $L$ che non contiene $K$. Allora esiste un unico punto $P \in C$ tale che $R$ domina $\cO_P(C)$.
+    \end{proposizione}
+    \begin{proof}
+        Si veda \cite{fulton} Capitolo $7$, Paragrafo $1$.
+    \end{proof}
+    \begin{comment}
+    \begin{proof}
+        Posso supporre che $C$ sia una sottovarietà chiusa di $\P^n$, e che, a meno di un cambio di coordinate, $C \cap U_i \neq \emptyset$ per ogni $i$, dove $U_i$ sono gli aperti di $\P^n$ definiti nel Paragrafo \ref{par:aff-proj}. \\
+        Allora, esistono $x_1,\ldots,x_n \in \gG_h(C)$, tali che $\gG_h(C) = \frac{k[X_1,\ldots,X_{n+1}]{I(C)}} = k[x_1,\ldots,x_{n+1}], x_i \neq 0 \forall i$.\\
+        Sia ora $N = \,ax_{i,j}\ord(\frac{x_i}{x_j})$ e , a meno di riordinare le coordinate, posso suppore che esista $j \leq n$ tale che $N = \ord(\frac{x_j}{x_{n+1}})$. Ne segue che per ogni $i$: \begin{equation*}
+            \ord(\frac{x_i}{x_{n+1}}) = \ord(\frac{x_i}{x_j}\frac{x_j}{x_{n+1}}) = N - \ord(\frac{x_j}{x_i}) \geq 0
+        \end{equation*}
+        Sia  ora $C_{n+1}$ la curva affine associata a $C \cap U_{n+1}$, allora, $\gG(C_{n+1})$ si può identificare con $k[\frac{x_1}{x_{n+1}},\ldots,\frac{x_n}{x_{n+1}}]$, e per quanto visto sopra, $\gG(C_{n+1}) \leq R$.\\
+        Sia ora $M$ l'ideale massimale di $R$ e sia $J = M \cap \gG(C_{n+1})$. \\
+        $J$ è un ideale primo: è sottoinsieme di un ideale chiuso per somma, per prodotto per un elemento di $\gG(C_{n+1})$ e non è vuoto ad esempio, $0 \in J$. Dunque è un ideale. Inoltre, se $f,g \in \gG(C_{n+1}),fg \in J \ord(fg) = \ord(f) + \ord(g) > 0$, 
+        quindi almeno uno dei due ordini deve essere positivo, sia quello di $f$. Dunque $f \in J$. \\
+        Allora, esiste una sottovarietà chiusa di $V \subseteq C_{n+1}$ associata a $J$; siccome $\dim(C_{n+1}) = 1$, se $\dim(V) = 1$, allora $V = C_{n+1}$, ma allora $J = (0)$, e gli elementi non nulli di $\gG(C_{n+1})$ sono invertibili in $R$, dunque $K \subseteq R$, ma questo è assurdo.\\
+        Allora, $\dim(V) = 0$, cioè $V$ è un punto $P$. \\
+        Sia $f \in \cO_P(C_{n+1})$, allora, $f \in k(C_{n+1})$, i cui elementi sono quozienti di elementi di $\gG(C_{n+1})$, quindi in questo anello esistono $g,h$ definite in $P$ con $h(P) \neq 0$ e $f(P) = \frac{g(P)}{h(P)}$; allora, siccome $\gG(C_{n+1}) \leq R$ e $h(P) \neq 0, h \notin M$, perché se 
+        così fosse, $h \in M \cap \gG(C_{n+1})$, dunque $h(P) = 0$, assurdo. Dunque $h(P) \notin M \Longrightarrow h$ è invertibile in $R$: \begin{equation*}
+            \ord(f) = \ord(\frac{g}{h}) = \ord(g) - \ord(h) = \ord(g) \geq 0
+        \end{equation*}
+        Allora $M_P(C_{n+1}) = \{f \in \cO_P(C_{n+1}) : f(P) = 0\}$, ma con le notazioni precedenti questo accade se e solo se $g(P) = 0 \iff g \in M \iff \ord(f) = \ord(g) > 0$. Questo prova che $R$ domina $\cO_P(C_{n+1}) = \cO_P(C)$.\\
+        $P$ è unico, infatti $R$ dominasse anche $\cO_Q(C_{n+1}), Q \neq P$, allora, esiste $f \in k(C_{n+1})$ tale che $f \in M_P(C_{n+1}), \frac{1}{f} \in \cO_Q(C_{n+1})$, dunque $\ord(f) > 0,\ord(\frac{1}{f}) \geq 0$, assurdo. \\
+        Una tale funzione esiste sempre perché: $f \in k(C_{n+1})$ è quoziente di elementi di $\gG(C_{n+1})$, quindi siccome $P,Q$ sono distinti esiste $f \in \gG(C_{n+1})$, che si annulla in $P$ e non in $Q$, quindi $f \in k(C_{n+1})$ è una tale funzione.
+    \end{proof}
+    \end{comment}
+    \begin{corollario}
+        Sia $F$ una mappa razionale da una curva $C$ ad una curva proiettiva $C'$; allora i punti semplici di $C$ sono nel dominio di $F$.
+    \end{corollario}
+    \begin{proof}
+        Se $F$ non è domininante allora è costante (Esercizio \ref{ex:dm}), quindi è definita su ogni punto di $C$. \\
+        Sia quindi $F$ dominante e $P \in C$ un punto semplice. Allora, posto $R = \cO_P(C), L = \tilde{F}(k(C'))$, per la Proposizione \ref{prop:techn1}, se $R$ domina $\tilde{F}(\cO_Q(C'))$ per un $Q \in C'$, allora $P$ è nel dominio di $F$. Ma siccome $F$ è dominante 
+        $\tilde{F}$ è isomorfismo tra $k(C')$ ed $L$, quindi $R$ domina $\tilde{F}(\cO_Q(C'))$ per un oppurtuno $Q$ se $L \not\subseteq R$. \\
+        Se per assurdo fosse $L \subseteq R \subseteq k(C)$, essendo $\frac{k(C)}{L}$ algebrica finita per l'Esercizio \ref{ex:dm}, segue che $R$ è un campo per l'Esercizio \ref{ex:fields}. Ma questo è assurdo perché un DVR non è un campo.
+    \end{proof}
+    \begin{corollario}
+        Sia $C$ una curva proiettiva non-singolare, $K = k(C)$. Allora i DVR di $K$ sono tutti e soli gli $\cO_P(C)$.
+    \end{corollario}
+    \begin{proof}
+        Che gli $\cO_P(C)$ siano DVR di $K$ è ovvio. Viceversa se $R$ è un DVR di $K$, allora per la Proposizione \ref{prop:techn2} $R$ domina un unico $\cO_P(C)$. Quindi siamo nella situazione di due DVR con uno che domina l'altro inclusi nello stesso campo, che per entrambi è il campo dei quozienti. 
+        Ne segue $R = \cO_P(C)$. L'inclusione non banale si dimostra così: $r \in R \subseteq K \Longrightarrow r = \frac{g_1}{g_2}, g_2 \neq 0, g_1,g_2 \in \cO_P(C)$; se $g_2$ è invertibile in $\cO_P(C)$, allora $r \in \cO_P(C)$, altrimenti, se $g_2$ non è ivi invertibile, allora, neanche in $R$ lo 
+        è, quindi $r \notin R$, assurdo.
+    \end{proof}
+    Con "risolvere le singolarità" di una curva proiettiva $C$ si intende trovare una curva proiettiva non-singolare $X$ ed una mappa birazionale $f : X \to C$. Per fare questo si parte dalle curve piane, infatti, se si riesce a dimostrare che per ogni curva piana esiste una tale curva non-singolare, 
+    allora, siccome tutte le curve proiettive sono birazionalmente equivalenti ad una curva piana, seguirà che ogni curva è birazionalmente equivalente ad una non-singolare.\\
+    L'idea fondamentale è quella dello "scoppiamento dei punti singolari di una curva", che ad un livello intuitivo può essere descritto nel seguente modo: sia $C \subseteq \P^2$ una curva e $P$ un suo punto multiplo. Si rimuove il punto $P$ dal piano e lo si sostituisce con una retta proiettiva $r$. I punti 
+    di $r$ corrispondono alle direzioni tangenti a $C$ in $P$. Tutto questo si può fare in modo che il "piano scoppiato", ovvero $B = \P^2 \setminus \{P\} \cup r$ sia ancora una varietà. In tal modo si può costruire una cuva $C' \subseteq B$ birazionalmente equivalente a $C$, ma con singolarità "migliori". \\
+    \noindent Studierò prima cosa avviene nel caso affine e poi in quello proiettivo. \\
+    Sia $P = (0,0) \in \A^2$ e sia $U = \{(x,y) \in \A^2 : x \neq 0\}$. Considero ora il morfismo $f : U \to \A^1 = k$ definito per ogni $(x,y) \in U$ da $f(x,y) = \frac{y}{x}$. Allora, $G \subseteq \A^1 \times \A^2 = \A^3, G = \{P = (x,y,z) \in \A^3 : y =xz, x \neq 0\}$, è il grafico di $f$. \\
+    Sia ora $B = \{P = (x,y,z) : y = xz\}$; siccome $Y - XZ \in k[X,Y,Z]$ è irriducibile, $B$ è varietà. Sia inoltre $\pi : B \to \A^2$, la restrizione a $B$ della proiezione da $\A^3$ sulle prime due coordinate: $\pi$ è un morfismo. \\
+    Valgono le seguenti: \begin{itemize}
+        \item $\pi(B) = U \cup \{P\}$;
+        \item $\pi^{-1}(P) = L = \{(0,0,z): z \in k\}$ e $\pi^{-1}(U) = G$
+    \end{itemize}
+    Ne segue che $\pi$ è un isomorfismo fra $G$ ed $U$, da cui $G$ è sottovarietà aperta di $B$, e $B$ è la chiusura di $G$ in $\A^3$. Infine $L$ è sottovarietà chiusa di $B$. \\
+    Sia $\gvf : \A^2 \to B$ definita per ogni $(x,z) \in \A^2$ da $\gvf(x,z) = (x,xz,z)$: è un isomorfismo con inversa la proiezione sulla prima e terza coordinata. Considero quindi $\psi : \A^2 \to \A^2$, definita come $\psi = \pi \circ \gvf$; è morfismo perché composta di morfismi. \\
+    Sia $E = \psi^{-1}(P) = \gvf^{-1}(L) = \{(x,z) \in \A^2 : x = 0\}$. Ne deduco che $\psi : \A^2 \setminus E \to U$ è isomorfismo.\\
+    Sia ora $C$ una curva irriducibile del piano affine e sia $C_0 = C \cap U$ una sottovarietà aperta di $C$. Sia $C_0' = \psi^{-1}(C_0)$ e sia $C'$ la chiusura di $C_0'$ in $\A^2$. Sia infine $f : C' \to C$ la restrizione di $\psi$ a $C'$. Siccome $C_0 \subseteq U, f$ è un isomorfismo. 
+    Dunque tramite $\tilde{f}$ possiamo identificare $k(C) = k(x,y)$ con $k(C') = k(x,z), y = xz$. \\
+    Valgono i seguenti fatti: \begin{itemize}
+        \item Sia $C = V(F), F = F_r + \cdots + F_n, F_i$ polinomio omogeneo di grado $i$ in $k[X,Y]$, e siano $r = m_P(C), n = \deg(C)$. Allora, $C' = V(F'), F'(X,Z) = F_r(1,Z) + XF_{r+1}(1,Z) + \cdots + X^{n-r}F_n(1,Z)$.
+        \begin{proof}
+                $F(X,XZ) = \sum_{i=r}^n X^i F_i(1,Z) = X^r F'(X,Z)$. Ma siccome $F_r(1,Z) \neq 0$, allora, $X$ non divide $F'$. Se per assurdo $F' = GH$, tali che \begin{equation*}
+                    F = X^r F'(X,Z) = X^r F' \left( X,\frac{Y}{X} \right) = X^r G \left( X, \frac{Y}{X} \right) H \left( X, \frac{Y}{X} \right)
+                \end{equation*}
+                ma allora $F$ è riducibile, che è assurdo. Ne segue che anche $F'$ è irriducibile, ne segue che $V(F')$ è un chiuso che contiene $C_0'$. Quindi $C' \subseteq V(F')$. \\
+                Viceversa \begin{equation*}
+                    F'(P) = 0 \Longrightarrow F(\psi(P)) = 0 \Longrightarrow \psi(P) \in C \Longrightarrow P \in C'
+                \end{equation*} 
+        \end{proof}
+        \item Supposto che la retta $X$ non sia tangente a $C$ in $P$, posso supporre che $F_r(X,Y) = \prod_{i=1}^s (Y-\alpha_iX)^{r_i}$. Allora $f^{-1}(P) = \{P_1,\ldots,P_s\}$, con $P_i = (0,\alpha_i)$ e vale che $m_{P_i}(C') \leq I(P,C \cap E) = r_i$. In particolare, se $P$ è un punto multiplo ordinario, 
+        $P_i$ è un punto semplice di $C'$ e $\ord_{P_i}^{C'}(x) = 1$.
+        \begin{proof}
+            Chiaramente: \begin{equation*}
+                f^{-1}(P) = C' \cap E = \{(0,\alpha) : F_r(1,\alpha) = 0\}.
+            \end{equation*}
+            Inoltre $m_{P_i}(C) \leq I(P_i, F' \cap X) = I(P_i, \prod_{i=1}^r(Z-\alpha_i) \cap X) = r_i$. La parte di enunciato riguardo l'ordine in $P_i$ della funzione $x$ è ovvia.
+        \end{proof}
+        \item Esiste un intorno affine $W$ di $P$ in $C$ tale che $W' = f^{-1}(W)$ sia una sottovarietà aperta affine di $C'$. Inoltre $\gG(W')$ è un modulo finitamente generato su $\gG(W)$ e $x^{r-1}\gG(W') \subseteq \gG(W)$.
+        \begin{proof}
+            Sia $F(X,Y) = \sum_{i+ \geq r} a_{ij}X^iY^j$ e sia $H(Y) = \sum_{j \geq r} a_{0j}Y^{j-r}$, ovvero $F(X,Y) = Y^rH(Y) + XG(X,Y)$. Sia infine $h$ l'immagine in $\gG(C)$ di $H$.\\
+            Chiaramente $H(0) \neq 0$, quindi $W = C_h = \{Q \in C : h(Q) \neq 0\}$ è un intorno aperto affine di $P$ in $C$. Dimostro che $W = (C_h \cap U) \cup \{P\}$; un'inclusione ($\supseteq$) è ovvia. \\
+            Viceversa, \begin{multline*}
+                Q \in W \Longrightarrow F(Q) = 0, H(Q) \neq 0 \Longrightarrow x_Q = 0 = y_Q \text{ oppure } \\ x_Q \neq 0 \Longrightarrow Q \in (C_h \cap U) \cup \{P\}
+            \end{multline*}
+            Infine osservo che \begin{equation*}
+                F'(X,Z) = \sum_{i + j \geq r} a_{ij}X^{i+j-r} Z^j = \sum_{i < r} a_{ij}X^{i+j-r}Z^{r-i} + \sum_{i \geq r}a_{ij}X^{i-r}Y^j
+            \end{equation*}
+            Ma questo prova, valutando in $(x,z)$, che $z^r$ è una combinazione della forma $\sum_{i} b_iz^{r-i}$, da cui  $\gG(W')$ è un modulo finitamente generato su $\gG(W)$. Inoltre per $i \leq r-1$: \begin{equation*}
+                x^{r-1}z^i = x^{r-1}\frac{y^i}{x^i} \in \gG(W)
+            \end{equation*}
+        \end{proof}
+    \end{itemize}
+    Siano ora $P_1,\ldots,P_t \in \P^2$, e per semplicità nella trattazione suppongo che $P_i \in U_3$ per ogni $i$, quindi $P_i = [a_{i1},a_{i2},1]$. Sia $U = \P^2 \setminus \{P_1,\ldots,P_t\}$. \\
+    Definisco i morfismi $f_i : U \to \P^1, f_i(X_1,X_2,X_3) = [X_1 -a_{i1}X_3, X_2 - a_{i2}X_3]$ e sia $f = (f_1,\ldots,f_t) : U \to \P^1 \times \cdots \times \P^1$ la mappa prodotto. Sia infine $G \subseteq U \times \P^1 \times \cdots \times \P^1$ il grafico di $f$.\\
+    Fissate quindi le coordinate omogenee $X_1,X_2,X_3$ per $\P^2$ e $Y_{i1},Y_{i2}$ per la $i$-esima copia di $\P^1$, considero $B = V({Y_{i2}(X_1-a_{i1}X_3) - Y_{i1}(X_2-a_{i2}X_3)$ : $ i \in \{1,\ldots,t\}})$.\\
+    Chiaramente $G \subseteq B$. Sia $\pi : B \to \P^2$ la restrizione della proiezione e sia, per ogni $i$, $E_i = \pi^{-1}(P_i)$. Valgono i seguenti fatti: \begin{enumerate}
+        \item $E_i = \{P_i\} \times \{f_1(P_i)\} \times \cdots \times \P^1 \times \cdots \times \{f_t(P_i)\}$, con $\P^1$ nell'$i$-esima posizione; quindi $E_i$ è isomorfo a $\P^1$.
+        \item $B \setminus \cup_{i=1}^t E_i = B \cap (U \times \P^1 \times \cdots \times \P^1) = G$, perciò $\pi$ si restringe ad un isomorfismo tra $B \setminus \cup_{i=1}^t E_i$ e $U$.
+        \item Se $T$ è un cambio di coordinate proiettive di $\P^2$, con $T(P_i) = P_i'$, e le mappe $f_i' : \P^2 \setminus \{P_1', \ldots, P_t'\} \to \P^1$ sono definite come le $f_i$, ma con i $P_i'$ al posto dei $P_i$, allora esiste un unico cambio di coordinate 
+        proiettive $T_i$ di $\P^1$ tale che $T_i \circ f_i = f_i' \circ T$, dunque $(T_1,\ldots,T_t) \circ f = f' \circ T$. Infine $(T,T_1,\ldots,T_t)$ mappa isomorficamente $G,B,E_i$ nei corrispondenti $G',B',E_i'$ definiti a partire da $f'$.
+        \item Se $T_i$ è un cambio di coordinate in $\P^1$ per un $i$ fissato, esiste un cambio di coordinate $T$ di $\P^2$, tale che $T(P_i) = P_i$ e $T_i \circ f_i = f_i \circ T$.
+        \item Siano $i \in \{1,\ldots,t\}, Q \in E_i$ fissati; per gli ultimi due punti posso supporre che $P_1 = [0,0,1], Q = [\lambda,1], \exists \lambda \in k$. Sia $\gvf_3^{-1} : \A^2 \to U_3$ il morfismo canonico. Siano $V = U_3 \setminus \{P_j : j \neq i\}, W = (\gvf_3^{-1})^{-1}(V), 
+        \psi$ la mappa definita nel caso affine e $W' = \psi^{-1}(W)$. A questo punto considero $\gvf : W' \to \P^2 \times \P^1 \times \cdots \times \P^1$ definita da $$\gvf(x,z) = ((x,xz,1), f_1(x,xz,1), \ldots,(z,1),\ldots,f_t(x,xz,1))$$ con $(z,1)$ in $i$-esima posizione. 
+        $\gvf$ è un morfismo, ed è tale che $\pi \circ \gvf = \gvf_3 \circ \psi$. Posto $V' = \gvf(W') = B \setminus (\cup_{j \neq i} E_j \cup V(X_3) \cup V(Y_{i2})), V'$ è intorno aperto di $Q$ in $B$.
+        \item $B$ è la chiusura di $G$: se $S$ è un chiuso che contiene $G$, allora $\gvf^{-1}(S)$ è un chiuso di $W'$ che contiene $\gvf^{-1}(G) = W' \setminus V(X)$, che è aperto quindi denso, ne segue che $\gvf^{-1}(S) = W'$, da cui $Q \in S$. Data l'arbitrarietà di $Q$ in 
+        $B \setminus G$, segue che $B$ è la chiusura di $G$.
+        \item Il morfismo definito su $\P^2 \times \P^1 \times \cdots \times \P^1 \setminus V(X_3Y_{i2})$ verso $\A^2$ che mappa un elemento del suo dominio in $(\frac{x_1}{x_3},\frac{y_{i1}}{y_{i2}})$ è, se ristretto a $V'$, l'inversa di $\gvf$. Allora abbiamo il seguente diagramma 
+        commutativo: \\
+        \begin{center}
+        \begin{tikzcd}
+            \A^2 \arrow[r, hookleftarrow] \arrow[d, "\psi"] & W' \arrow[r, "\gvf"] \arrow[d] & V' \arrow[r, hookrightarrow] \arrow[d] & B \arrow[d, "\pi"] \\
+            \A^2 \arrow[r, hookleftarrow]                   & W  \arrow[r, "\gvf_3"]         & V  \arrow[r, hookrightarrow]           & \P^2
+        \end{tikzcd} 
+        \end{center}
+        Quindi $\pi$, attorno a $Q$ si comporta analogamente alla mappa $\psi$, dunque valgono per $\pi$ tutte le proprietà di $\psi$.
+        \item Sia $C$ una curva irriducibile in $\P^2$. Sia $C_0 = C \cap U, C_0' = \pi^{-1}(C_0) \subseteq G$ e $C'$ la chiusura di $C_0'$ in $B$. Allora $f : C' \to C$ si restringe ad un isomorfismo tra $C_0'$ e $C_0$. Per quanto visto nel punto precedente, tale isomorfismo ha la stessa 
+        forma del caso affine.  
+    \end{enumerate}
+    Vale quindi la seguente: \begin{proposizione}
+        Sia $C$ una curva proiettiva piana irriducibile, e suppongo che tutti i suoi punti multipli, siano ordinari. Allora esiste una curva non-singolare $C'$ ed una mappa birazionale da $C'$ a $C$.
+    \end{proposizione}
+    \begin{proof}
+        Si veda \cite{fulton} Capitolo $7$, Paragrafo $3$.
+    \end{proof}
+    Per quanto visto quindi, se $C$ è una curva piana proiettiva i cui punti multipli sono ordinari, allora $C$ è birazionalmente equivalente ad una curva non singolare. Adesso dimostro che ogni curva piana è birazionalmente equivalente ad una curva i cui punti multipli sono ordinari.\\
+    Siano $P = [0,0,1], P' = [0,1,0], P'' = [1,0,0] \in \P^2$; tali punti sono detti fondamentali. Siano $L = V(Z), L' = V(Y), L'' = V(X)$ e queste rette sono dette eccezionali. Sia infine $U = \P^2 \setminus V(XYZ)$.\\
+    Definisco $Q : \P^2 \setminus \{P,P',P''\} \to U \cup \{P,P',P''\}, Q(x,y,z) = [yz,xz,xy]$. $Q$ è un morfismo ed è tale che $Q^{-1}(P) = L \setminus \{P',P''\}$ (e simmetricamente per $P',P''$).\\
+    Osservo ora che se $[x,y,z] \in U$: \begin{equation*}
+        Q^2(x,y,z) = Q(yz,xz,xy) = [xxyz,yxyz,zxyz] = [x,y,z]
+    \end{equation*}
+    Quindi su $U, Q = Q^{-1}$, quindi $Q$ è un isomorfismo di $U$ con se stesso. In particolare induce una mappa birazionale di $\P^2$ con se stesso. La mappa $Q$ è detta trasformazione quadratica standard.\\
+    Sia $C$ una curva irriducibile in $\P^2$, e suppongo non sia una retta eccezionale. Allora $C \cap U$ è una curva chiusa in $U$. Sia $C'$ la chiusura di $Q(C \cap U) = Q^{-1}(C \cap U)$ in $\P^2$; $Q$ si restringe ad un morfismo tra $C' \setminus \{P,P',P''\}$ e $C$. Inoltre $(C')' = C$ 
+    perché $Q^2 = \text{id}_U$.\\
+    Sia $F \in k[X,Y,Z]$, tale che $C = V(F), n = \deg(F)$ definisco la trasformata algebrica di $F$ come: $F^Q = F(YZ,XZ,XY)$. Tale polinomio è omogeneo di grado $2n$.\\
+    Valgono i seguenti fatti: \begin{enumerate}
+        \item Se $m_P(C) = r$, allora, $Z^r$ è la più alta potenza di $Z$ che divide $F^Q$, e simmetricamente in $P',P''$. \\
+    \end{enumerate}
+    Se $F^Q = X^{r''}Y^{r'}Z^rF'$, il polinomio omogeneo $F'$ è detto trasformata propria di $F$. \begin{enumerate} \setcounter{enumi}{1}
+        \item $\deg(F') = 2n - r - r' - r'', (F')' = F, V(F') = C'$.
+        \item $m_P(C') = n - r' - r''$, e simmetricamente per $P',P''$.
+    \end{enumerate}
+    Suppongo ora che nessuna retta eccezionale sia tangente a $C$ in un punto fondamentale. Una tale curva si dice essere in buona posizione.
+    \begin{enumerate}\setcounter{enumi}{3}
+        \item Se $C$ è in buona posizione, allora, anche $C'$ lo è. \\
+    \end{enumerate}
+    Sia $C$ in buona posizione e che $P \in C$; sia $C_0 = (C \cap U) \cup \{P\}, C_0' = C' \setminus V(XY)$. Allora $f : C_0' \to C_0$ è la restrizione di $Q$
+    Considero ora il polinomio affinizzato $F_* = F(X,Y,1)$, e la curva affinizzata $C_* = V(F_*) \subseteq \A^2$; definisco $(F_*)' = F(X,XZ,1)X^{-r} C_*' = V(F_*') \subseteq \A^2$ ed $f_* : C_*' \to C_*, f_*(x,z) = (x,xz)$.
+    \begin{enumerate} \setcounter{enumi}{4}
+        \item Esiste un intorno $W$ di $(0,0)$ in $C_*$ e isomorfismi $\gvf : W \to C_0, \gvf' : W' = f_*^{-1}(W) \to C_0'$ tali che $\gvf \circ f_* = \gvf' \circ f$.
+        \item Se $C$ è in buona posizione e $P_1,\ldots,P_s$ sono punti non-fondamentali su $C' \cap L$, allora, $m_{P_i}(C') \leq I(P_i,C' \cap L)$. \\
+    \end{enumerate}
+    Si dice che la curva $C$ è in posizione eccellente se interseca $L$ trasversalmente in $n$ punti non-fondamentali distinti, ed interseca trasversalmente $L',L''$ ciascuna in $n-r$ punti non-fondamentali distinti.
+    \begin{enumerate} \setcounter{enumi}{6}
+        \item Se $C$ è in posizione eccellente, allora gli unici punti multipli di $C'$ sono quelli in $C' \cap U$ che corrispondono a quelli in $C \cap U$ e questa corrispondenza rispetta la molteplicità dei punti e se questi sono ordinari o meno; $P,P',P''$ che sono ordinari di molteplicità 
+        $n,n-r,n-r$ rispettivamente e dei punti $P_1,\ldots,P_s$ non fondamentali su $C' \cap L$, di molteplicità tali che $m_{P_i}(C') \leq I(P_i,C'\cap L), \sum_{i=1}^s I(P_i,C'\cap L) = r$.\\
+    \end{enumerate}
+    Per $C$ curva piana proiettiva irriducibile, di grado $n$ si definisce $g_*(C) = \frac{(n-1)(n-2)}{2} - \sum_{P \in C}\frac{r_P(r_P-1)}{2}$, dove $r_P = m_P(C)$. \begin{enumerate} \setcounter{enumi}{7}
+        \item Se $C$ è in posizione eccellente allora, $g_*(C') = g_*(C)-\sum_{i=1}^s\frac{r_i(r_i-1)}{2}$, dove $r_i = m_{P_i}(C')$ e $P_1,\ldots,P_s$ sono i punti non fondamentali di $C' \cap L$.
+    \end{enumerate}
+    Abbandono ora le notazioni per punti fondamentali e rette eccezionali che ho usato fino ad ora.
+    \begin{lemma}
+        Sia $F$ una curva piana proiettiva irriducibile e $P$ un suo punto, allora esiste un cambio di coordinate $T$, tale che $F^T$ è in posizione eccellente e $T(0,0,1) = P$.
+    \end{lemma}
+    \begin{proof}
+        Si veda \cite{fulton} Capitolo $7$, Paragrafo $4$.
+    \end{proof}
+    Se $T$ è un cambio di coordinate omogenee, allora, $Q \circ T$ è detta trasforazione quadratica e $(F^T)'$ è detto trasformata quadratica di $F$. Se $F^T$ è in posizione eccellente e $T(0,0,1) = P$, allora si dice che la trasformata è centrata in $P$.\\
+    Se $F = F_1,\ldots,F_n = G$ sono curve e $F_i$ è trasformata quadratica di $F_{i-1}$, allora, si dice che $F$ è trasformata in $G$ da una sequenza finita di trasformazioni quadratiche.
+    \begin{proposizione}
+        Tramite un numero finito di trasformazioni quadratiche, ogni curva piana proiettiva irriducibile può essere trasformata in una curva i cui punti multipli sono ordinari.
+    \end{proposizione}
+    \begin{proof}
+        Si veda \cite{fulton} Capitolo $7$, Paragrafo $4$.
+    \end{proof}
+    \begin{teorema}\label{teo:model}
+        Sia $C$ una curva proiettiva. Allora esiste una curva proiettiva non-singolare $X$ ed una mappa birazionale $f$ da $X$ a $C$. Se $f': X' \to C$ sono un'altra mappa birazionale ed un altra curva non-singolare, allora esiste un unico isomorfismo $g: X \to X'$ tale che $f' \circ g = f$.
+    \end{teorema}
+    \begin{proof}
+        Si veda \cite{fulton} Capitolo $7$, Paragrafo $5$.
+    \end{proof}
+    \begin{corollario}
+        Esiste un corrispondenza biiettiva fra curve proiettive non-singolari e campi di funzioni in una variabile. Se $X,X'$ sono due tali curve, i morfismi dominanti da $X$ a $X'$ corrispondono agli omomorfismi da $k(X')$ a $k(X)$.
+    \end{corollario}
+    Sia $C$ una curva proiettiva. $f : X \to C$ come nel Teorema \ref{teo:model}. Si dice che $X$ è il modello non-singolare di $C$ o di $K = k(C)$. Si identifica $k(X)$ con $k(C)$ tramite $\tilde{f}$. I punti di $X$ sono detti posti di $C$ ed un posto $Q \in X$ si dice centrato in $P \in C$ se 
+    $f(Q) = P$.\\
+    Suppongo ora che $C$ sia piana, $Q \in X, f(Q) = P \in C$. Per ogni altra curva piana $G$, eventualmente riducibile, sia $G_* \in \cO_P(\P^2)$ e sia $g$ l'immagine di $G_*$ in $\cO_P(C) \subseteq k(C) = k(X)$. Definisco $\ord_Q(G) = \ord_Q(g)$.\\
+    \begin{proposizione}\label{prop:molt-int}
+        Sia $C$ una curva piana proiettiva irriducibile, $P \in C, f : X \to C$ come sopra. Sia $G$ un'altra curva piana, eventualmente riducibile. Allora: $I(P,C \cap G) = \sum_{Q \in f^{-1}(P)}\ord_Q(G)$.
+    \end{proposizione}
+    \begin{proof}
+        Si veda \cite{fulton} Capitolo $7$, Paragrafo $5$.
+    \end{proof}
+    \begin{lemma}
+        Se $P$ è un punto multiplo ordinario su $C$ di molteplicità $r$ e sia $f^{-1}(P) = \{P_1,\ldots,P_r\}$. Se $z \in k(C)$ e $\ord_{P_i}(z) \geq r-1$, allora $z \in \cO_P(C)$.
+    \end{lemma}
+    \begin{proof}
+        Si veda \cite{fulton} Capitolo $7$, Paragrafo $5$.
+    \end{proof}
+    \begin{proposizione}\label{prop:n-c}
+        Siano $F$ una curva piana proiettiva irriducibile e $P$ un suo punto multiplo ordinario di molteplicità $r$ e siano $P_1,\ldots,P_r$ i posti di $F$ centrati in $P$. Siano inoltre $G,H$ altre due curve piane, eventualmente riducibili. Allora le condizioni di Noether sono soddisfatte in $P$ rispetto a 
+        $F,G,H$ se e solo se $\forall i \in \{1,\ldots,r\} \ord_{P_i}(H) \geq \ord_{P_i}(G) + r-1$.
+    \end{proposizione}
+    \begin{proof}
+        Si veda \cite{fulton} Capitolo $7$, Paragrafo $5$.
+    \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+   

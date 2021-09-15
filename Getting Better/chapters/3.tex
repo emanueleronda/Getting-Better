@@ -1,0 +1,106 @@
+\chapter{Differenziali ed il Divisore Canonico}
+    \section{Derivazioni e Differenziali}
+        Sia $R$ un anello che contiene $k$, ed $M$ un $R$-modulo. Una 
+        derivazione di $R$ in $M$ su $k$ è una funzione $k$-lineare $D : R \to 
+        M$ tale che $D(xy) = xD(y) + yD(x)$ per ogni $x,y \in R$.
+        \begin{lemma}\label{lem:der}
+            Sia $R$ un dominio con campo dei quozienti $K$ e sia $D : R \to M$ 
+            una derivazione. Allora esiste un'unica derivazione $\tilde{D} : K 
+            \to M$ che estende $D$.
+        \end{lemma}
+        \begin{proof}
+            Sia $z \in K$, allora esistono $x,y \in, y \neq 0$, tali che $z = 
+            \frac{x}{y}$. Allora $x = yz$, da cui, imponendo che valga la 
+            condizione sui prodotti e riordinando, si trova la formula 
+            $\tilde{D}(z) = y^{-1}(D(x) - zD(y))$. Siccome $D$ è $k$-lineare, 
+            anche $\tilde{D}$ lo è. Allora, se $z = \frac{x}{y}, w = \frac{u}{v}$: \begin{multline*}
+                \tilde{D}(zw) = \frac{D(xu) - zwD(yv)}{yv} = \\ = z\frac{D(u)}{v} + w \frac{D(x)}{y} - z \frac{D(v)}{v} - w \frac{D(y)}{y} = z \tilde{D}(w) + w \tilde{D}(z)
+            \end{multline*}
+        \end{proof}
+        Voglio definire i differenziali di $R$ come elementi della forma 
+        $\sum x_i dy_i, x_i,y_i \in R$. Un modo per fare ciò è la seguente 
+        costruzione: sia per $x \in R$ il simbolo $[x]$, e sia $F$ il 
+        $R$-modulo libero generato da $\{[x] : x \in R\}$. Sia inoltre $N$ il 
+        sottomodulo di $F$ generato dagli insiemi $\{[x+y]-[x]-[y]: x,y \in 
+        R\}, \{[\lambda x]- \lambda [x] : x \in R, \lambda \in k\}, 
+        \{[xy]-x[y]-y[x] : x,y \in R\}$. \\
+        Allora il modulo quoziente $\Omega_k(R) = \frac{F}{N}$ è detto 
+        \emph{modulo dei differenziali di }$R$ e la mappa $d : R \to 
+        \Omega_k(R)$, definita come $dx = \pi([x])$, è una derivazione.
+        \begin{lemma}
+            Per ogni $R$-modulo $M$, ed ogni derivazione $D : R \to M$, esiste 
+            un unico omomorfismo di $R$-moduli $\gvf : \Omega_k(R) \to M$ tale 
+            che $\gvf(dx) = D(x)$ per ogni $x \in R$.
+        \end{lemma}
+        \begin{proposizione} \label{prop:techn5}
+            Sia $K$ un campo di funzioni algebriche in una variabile su $k$. 
+            Allora, $\Omega_k(K)$ è uno spazio di dimensione $1$ su $K$. 
+            Inoltre se $x \in K \setminus k$, allora $dx$ è una base per 
+            $\Omega_k(K)$ su $K$.
+        \end{proposizione}
+        \begin{proof}
+            Sia $F \in k[X,Y]$ una curva affine che ha per campo di funzioni 
+            razionali $K$. Allora $R = \frac{k[X,Y]}{(F)} = k[x,y], K = 
+            k(x,y)$. In particolare posso supporre $F_Y \neq 0$, quindi $F$ 
+            non divide $F_Y$, perciò $F_Y(x,y) \neq 0$.\\
+            Il fatto che $K = k(x,y)$ prova che $dx,dy$ generano $\Omega_k(K)$ 
+            Ma: $$0 = d(F(x,y)) = F_X(x,y)dx + F_Y(x,y)dy \Longrightarrow dy = -\frac{F_X(x,y)}{F_Y(x,y)} dx$$
+            quindi, $dx$ genera $\Omega_k(K)$ e $\dim_K(\Omega_k(K)) \leq 1$. \\
+            Dimostro ora che $\Omega_k(K) \neq 0$: per farlo mi basta dimostrare che 
+            esiste una derivazione su $K$. Sia $G \in k[X,Y]$, e sia $\bar{G}$ la sua immagine in 
+            $R$. Allora definisco $D : R \to K, D(\bar{G}) = G_X(x,y) - \frac{F_X(x,y)}{F_Y(x,y)}G_Y(x,y)$.
+            $D$ è $k$-lineare perché le derivate di polinomi e le combinazioni lineari lo sono. Allora fissati $\bar{G},\bar{H} \in R$, e omettendo $x,y$: \begin{multline*}
+                D(\bar{G}\bar{H}) = (GH)_X - \frac{F_X}{F_Y}(GH)_Y = \\ = G_XH + GH_X - \frac{F_X}{F_Y}G_YH - \frac{F_X}{F_Y}GH_Y = HD(G) + GD(H)
+            \end{multline*}
+            Per il Lemma \ref{lem:der} posso quindi estenderla ad una derivazione su $K$.
+        \end{proof}
+        Da questa Proposizione segue che per ogni $f,t \in K, t \notin k$, esiste un unico $v \in K$, tale che $df = vdt$, 
+        quindi, scriverò $v = \frac{df}{dt}$ e dirò che $v$ è la \emph{derivata} di $f$ rispetto a $t$. 
+        \begin{proposizione}\label{prop:techn6}
+            Sia $K$ come nella Proposizione \ref{prop:techn5} e sia $\cO \leq K$ un DVR di $K$ e sia $t \in \cO$ un parametro 
+            uniformizzante. Allora: $f \in \cO \Longrightarrow \frac{df}{dt} \in \cO$.
+        \end{proposizione}
+        \begin{proof}
+            Nelle stesse notazioni della dimostrazione della Proposizione \ref{prop:techn5}, sia $\cO = \cO_P(F)$, con $P = (0,0)$, 
+            un punto semplice di $F$. Introduco la seguente notazione $z' = \frac{dz}{dt}, z \in K$.\\
+            Sia $N \in \N$, tale che $\ord_P(x),\ord_P(y) \geq -N$, allora, se $f \in R = k[x,y], f' = f_X(x,y)x' + f_Y(x,y)y'$, perciò 
+            $\ord_P(f') \geq -N$. \\
+            Sia $f \in \cO$, allora esistono $g,h \in R$, tali che $f = \frac{g}{h}, h(P) \neq 0$. Allora, da $f' = h^{-2}(hg'-gh')$, ne deduco che $\ord_P(f') \geq -N$
+            Sia $f \in \cO$; se $f = \sum_{i=0}^{N-1} \lambda_i t^i + gt^N$, per opportuni $\lambda_i \in k, g \in \cO$ (una tale scrittura 
+            esiste sempre), allora $f' = \sum_{i=1}^{N-1} i \lambda_i t^{i-1} + gNt^{N-1} + t^Ng'$, ma allora, tutti gli addendi sono in $\cO$, dunque 
+            $f ' \in \cO$.
+        \end{proof}
+
+    \newpage
+    \section{Divisori Canonici}
+        Sia $C$ curva proiettiva, $X$ il suo modello non-singolare, $K$ il loro campo delle funzioni razionali,$\Omega = \Omega_k(K)$, lo spazio dei differenziali. \\
+        Sia $\omega \in \Omega, \omega \neq 0$ e sia $P \in X$ un posto. Definisco l'ordine di $\omega$ in $P$ nel seguente modo: fissato $t \in \cO_P(X)$ un parametro 
+        uniformizzante, esiste un'unica $f \in K$, tale che $\omega = fdt$. Allora, pongo $\ord_P(\omega) = \ord_P(f)$. \\
+        La definizione è una buona definizione: sia $u \in \cO_P(X)$ un altro parametro uniformizzante, allora, $\omega = fdt = gdu$. Per la Proposizione \ref{prop:techn6}, 
+        $\frac{f}{g} = \frac{du}{dt}, \frac{g}{f} = \frac{dt}{du} \in \cO_P(X)$, dunque $\ord_P(f) = \ord_P(g)$.\\
+        Sia quindi ora per $\omega \in \Omega, \omega \neq 0, \div(\omega) = \sum_{P \in X} \ord_P(\omega)P$, il divisore associato ad $\omega$. Un divisore di questo tipo è detto 
+        \emph{canonico}. \\
+        Sia $W = \div(\omega)$ e sia $\omega' \in \Omega$ un altro differenziale non nullo. Allora, esiste un'unica $f \in K$ tale che $\omega' = f \omega$, dunque $W' = \div(\omega') 
+        = \div(f) + W$, ovvero $W,W'$ sono linearmente equivalenti. Viceversa se $W' \equiv W = \div(\omega)$, allora $W' = W + \div(f), \, \exists \, f \in K \Longrightarrow W' = \div(f \omega)$. \\
+        Ho dimostrato che i divisori canonici sono una classe di equivalenza rispetto alla lineare equivalenza. In particolare hanno tutti lo stesso grado.
+        \begin{proposizione}
+            Sia $C$ una curva piana di grado $n \geq 3$ i cui punti multipli sono ordinari. Sia $E$ come in \ref{par:div} e sia $G$ una curva piana di grado $n-3$. Allora, $\div(G) - E$ è un divisore canonico.
+        \end{proposizione}
+        \begin{proof}
+            Siano $X,Y,Z$ delle coordinate omogenee per $\P^2$ tali che $Z$ interseca $C$ in $n$ punti distinti $P_1,\ldots,P_n, [1,0,0] \notin C$ e le rette tangenti ai punti multipli di $C$ non contengano 
+            $[1,0,0]$.\\
+            Allora $x = \frac{X}{Z}, y = \frac{Y}{Z} \in K$. Se $F$ è un polinomio che definisce $C$, allora, pongo $f_X = F_X(x,y,1),f_Y = F_Y(x,y,1)$.\\
+            Sia $E_m = m \sum_{i=1}^n P_i - E$, e sia $\omega = dx$. Siccome i divisori della forma $\div(G) - E, \deg(G) = n-3$, sono linearmente equivalenti, è sufficiente dimostrare che $\div(\omega) = 
+            E_{n-3} + \div(f_Y) \iff \div(dx) - \div(F_Y) = -2 \sum_{i=1}^n P_i - E$.\\
+            Siccome $f_Y = \frac{F_Y}{Z^{n-1}}, dx = - \frac{f_Y}{f_X}dy = - \frac{F_Y}{F_X}dy \iff \ord_Q(dx) - \ord_Q(F_Y) = \ord_Q(dy) - \ord_Q(F_Y) \, \forall Q \in X$. \\
+            Se $Q$ è centrato in $P_i \in Z \cap C$, allora $y^{-1}$ è parametro uniformizzante di $\cO_{P_i}(C)$ e $dy = -y^2d(y^{-1})$, dunque $\ord_Q(dy) = -2$, inoltre $F_X(P_i) \neq 0$, perché altrimenti 
+            $Z$ sarebbe tangente a $C$ in $P_i$, ma questo contraddice le ipotesi sul riferimento. \\
+            Sia $Q$ centrato in $P = [a,b,1]$; a meno di una traslazione, che non cambia i differenziali, sia $Q$ centrato in $P = [0,0,1]$. Se $Y$ è tangente a $C$ in $P$, $P$ non è multiplo, quindi $x$ è parametro 
+            uniformizzante e $F_Y(P) \neq 0$. Allora $\ord_Q(dx) = \ord_Q(F_Y) = 0$. Infine se $Y$ non è tangente, $y$ è parametro uniformizzante, quindi $\ord_Q(dy) = 0, \ord_Q(f_X) = r_Q -1$.
+        \end{proof}
+        \begin{corollario}
+            Se $W$ è divisore canonico, allora, $\deg(W) = 2g - 2, \l(W) \geq g$.
+        \end{corollario}
+        \begin{proof}
+            Siccome i divisori canonici sono una classe di equivalenza per la lineare equivalenza, è sufficiente fare il calcolo per un divisore. Sia $W = E_{n-3}$. Per la Proposizione \ref{prop:en-3} si conclude.
+        \end{proof}
